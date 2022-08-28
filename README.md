@@ -34,4 +34,6 @@
 ###### 2. 마이페이지내에서 내가 올린 글(중고거래/동내가게) 한번에 확인 및 수정,삭제 가능
 
  <hr>
-
+ 
+ 
+![git5](https://user-images.githubusercontent.com/101978677/187062961-50e1d6ab-7464-41f6-bf94-a4df3b3ff48f.jpg)
