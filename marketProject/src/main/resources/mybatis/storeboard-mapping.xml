@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="mybatis.storeboardMapper">
+
+<!-- 가게등록 -->
+<insert parameterType="storeboardDTO" id="storeboardWrite">
+<!-- 앞에서 지은 별명!dto -->
+insert into storeboard values(seq_storeboard.nextval,#{id},#{name},#{city},#{gu},seq_storeboard.currval,0,0,
+#{storeName},#{storePlace},#{storeNum},#{storeCategory},#{storeContent},#{image1},sysdate) 
+</insert>
+
+<!-- 총 글수 -->
+<select id="getTotalA" resultType="int">
+select count(*) as cnt from storeboard 
+</select>
+
+<!-- 가게 상세페이지 -->
+<select parameterType="int" id="storeboardView" resultType="storeboardDTO">
+select * from storeboard where seq=#{seq}
+ </select>
+ 
+ <!-- 가게 리스트 -->
+<select id="storeboardsiGu" resultType="storeboardDTO">
+   select * from storeboard where city=#{city} and gu=#{gu}
+</select>
+
+ <!-- 가게 삭제 -->
+<delete parameterType="int" id="storeboardDelete">
+delete storeboard where seq=#{seq} 
+</delete>
+
+<!-- 가게 수정 -->
+<update parameterType="storeboardDTO" id="storeboardModify">
+update storeboard set city=#{city, jdbcType=VARCHAR},gu=#{gu, jdbcType=VARCHAR},storeName= #{storeName}, storePlace= #{storePlace}, storeNum= #{storeNum},storeCategory= #{storeCategory}, storeContent= #{storeContent},image1= #{image1, jdbcType=VARCHAR} where seq=#{seq} 
+</update>
+
+
+<!-- 댓글 수정 -->
+<update id="updateReply" parameterType="storeboardDTO">
+update storeboard set re_seq= re_seq+1 where re_ref=#{re_ref} and re_seq > #{re_seq}
+</update>
+
+<!--  댓글 등록 -->
+<insert id="insertReply" parameterType="storeboardDTO">
+insert into storeboard values(seq_storeboard.nextval, #{id}, ' ', ' ', ' ', #{re_ref}, ${re_seq+1}, ${re_lev+1}, ' ', ' ', ' ', ' ', #{storeContent}, null, sysdate)
+</insert>
+	
+<!--  댓글 보기 -->
+<select id="replyView" parameterType="int" resultType="storeboardDTO">	<!-- <![CDATA[ query문 ]]> 대괄호안의 모든 쿼리를 문자열로 취급-->
+	<![CDATA[	select *from
+		(select rownum rn, tt.* from
+		(select *from storeboard where re_lev>0 order by re_ref desc,re_seq asc)tt)
+		where rn>=1 and rn<=100 and re_ref=#{re_ref} and re_lev >0]]>
+</select>
+	
+<update id="replyModify">
+      update storeboard set storeContent= #{storeContent}, logtime=sysdate where seq=#{seq}
+</update>
+
+<!-- 마이 페이지 -->
+<select id="myDongne" parameterType="String" resultType="storeboardDTO">
+      select *from storeboard where id=#{id} and re_lev=0
+   </select>
+   
+</mapper>

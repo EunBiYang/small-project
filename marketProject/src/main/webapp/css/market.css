@@ -1,0 +1,328 @@
+@charset "UTF-8";
+/*웹폰트 임포트*/
+@font-face {
+	font-family: 'LotteMartHappy';
+	font-style: normal;
+	font-weight: 400;
+	src:
+		url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartHappy/LotteMartHappyMedium.woff')
+		format('woff');
+}
+@font-face {
+    font-family: 'Cafe24Simplehae';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Simplehae.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+	font-family: 'PyeongChangPeace-Bold';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Bold.woff2')
+		format('woff2');
+	font-weight: 700;
+	font-style: normal;
+}
+
+.intro, .market, .shop {
+	font-family: 'LotteMartHappy';
+	margin: auto;
+	width: 100%;
+	height: 400px;
+}
+
+.intro {
+	background-color: #F8F9FA;
+}
+
+.addForm thead {
+	width: 150px;
+	padding: 10px;
+	font-weight: bold;
+	vertical-align: top;
+	color: #fff;
+	background: black;
+	margin: 20px 10px;
+}
+
+table.addForm{
+	font-family: 'LotteMartHappy';
+	border-collapse: collapse;
+	text-align: left;
+	line-height: 1.5;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	margin: auto;
+	width: 55%;
+	margin-bottom: 56px;
+}
+table.addForm tbody th {
+	font-family: PyeongChangPeace-Bold;
+	font-size: 25px;
+	width: 150px;
+	padding: 10px;
+}
+
+table.addForm td {
+	width: 350px;
+	padding: 20px;
+	margin: auto;
+	height: 50px;
+	text-align: center;
+}
+
+table.addForm .even {
+	background: #e9e9e9;
+}
+input::placeholder {font-family:LotteMartHappy; color:#d5c4a1;}
+textarea::placeholder {font-family:LotteMartHappy;color:#d5c4a1;}
+
+input, #textarea, .hot-articles-nav-select {
+    width: 400px;
+    margin-left: 8px;
+    appearance: none;
+    box-sizing: border-box;
+    font-size: 23px;
+    letter-spacing: -0.6px;
+    text-align: left;
+    padding: 12px 16px;
+    border-radius: 6px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(233, 236, 239);
+    border-image: initial;
+    color:#d5c4a1;
+    font-family:LotteMartHappy;
+    float: left;
+}
+td {
+	align-items: center;
+	height: 70px;
+	margin-top: 100px;
+}
+
+::selection {
+	color: #212529;
+	background: #FFB98B;
+}
+
+
+.head-title {
+	font-size: 45px;
+	font-weight: 600;
+	letter-spacing: -0.6px;
+	text-align: center;
+	color: #212529;
+	margin-bottom: 40px;
+	font-family: LotteMartHappy;
+}
+
+/*지역 카테고리 */
+#hot-articles-navigation .hot-articles-nav-select {
+	width: 180px;
+	margin-left: 8px;
+	appearance: none;
+	box-sizing: border-box;
+	font-size: 20px;
+	letter-spacing: -0.6px;
+	text-align: left;
+	padding: 12px 16px;
+	border-radius: 6px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: rgb(233, 236, 239);
+	border-image: initial;
+	color: #d5c4a1;
+	font-family: LotteMartHappy;
+}
+
+button {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
+.card-titile, .card-price, .card-region-name, .card-counts {
+	margin-top: 12px;
+	font-family: LotteMartHappy;
+	margin: 0;
+	padding: 0;
+}
+.card-titile {
+	font-family: Cafe24Simplehae;
+	font-size: 23px;
+	font-weight: bolder;
+}
+.card-price {
+	font-size: 25px;
+	font-weight: bolder;
+}
+.card-region-name, .card-counts {
+	font-size: 15px;
+	font-weight: lighter;
+}
+
+
+.cards-wrap .card-link {
+	text-decoration: none;
+	color: #212529;
+	font-family: LotteMartHappy;
+}
+
+a:-webkit-any-link {
+	color: -webkit-link;
+	cursor: pointer;
+}
+
+#hot-articles-navigation .cards-wrap #aside {
+	float: left;
+	height: 200px;
+}
+
+.cards-wrap {
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
+	width: 65%;
+	margin: 0 auto;
+}
+
+.cards-wrap .card-top, .cards-wrap .card {
+	width: calc(25% - 44px);
+	margin-right: 44px;
+	margin-bottom: 56px;
+}
+
+.button-42 {
+	margin:1px;
+	margin-left:10px;
+	background-color: initial;
+	background-image: linear-gradient(-180deg, gray, black);
+	border-radius: 6px;
+	box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
+	color: #FFFFFF;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 20px;
+	font-family: LotteMartHappy;
+	height: 50px;
+	width: 140px;
+	line-height: 40px;
+	outline: 0;
+	overflow: hidden;
+	padding: 3px;
+	pointer-events: auto;
+	position: relative;
+	text-align: center;
+	touch-action: manipulation;
+	user-select: none;
+	-webkit-user-select: none;
+	vertical-align: top;
+	white-space: nowrap;
+	z-index: 9;
+	border: 0;
+	transition: box-shadow .2s;
+}
+
+.button-1 {
+	align-items:center;
+	background-color: initial;
+  	background-image: linear-gradient(-180deg, gray, black);
+	border-radius: 6px;
+	box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
+	color: #FFFFFF;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 18px;
+	font-family:LotteMartHappy;
+	height: 40px;
+	line-height: 40px;
+	outline: 0;
+	overflow: hidden;
+	padding: 0 20px;
+	pointer-events: auto;
+	position: relative;
+	text-align: center;
+	touch-action: manipulation;
+	user-select: none;
+	-webkit-user-select: none;
+	vertical-align: top;
+	white-space: nowrap;
+	width: 300px;
+	z-index: 9;
+	border: 0;
+	transition: box-shadow .2s;
+}
+
+.cards-wrap, .card-top, .card-photo img, .cards-wrap, .card-photo img {
+	top: 0;
+	bottom: 0;
+	box-sizing: border-box;
+	border-radius: 12px;
+	border: 1px solid transparent;
+}
+
+.button-42:hover {
+   background: #fff;
+   color: black;
+}
+
+.button-42:before, .button-42:after {
+   content: '';
+   position: absolute;
+   top: 0;
+   right: 0;
+   height: 2px;
+   width: 0;
+   background: #FF7E31;
+   transition: 400ms ease all;
+}
+
+.button-42:after {
+   right: inherit;
+   top: inherit;
+   left: 0;
+   bottom: 0;
+}
+
+.button-42:hover:before, .button-42:hover:after {
+   
+   transition: 800ms ease all;
+}
+
+
+.cards-wrap .card-top .card-desc {
+	margin-top: 12px;
+}
+
+.cards-wrap .card-link {
+	text-decoration: none;
+	color: #212529;
+}
+
+.hot-articles-nav-select {
+	width: 250px;
+	height: 50px;
+	overflow: auto;
+}
+
+.hot-articles-nav-select::-webkit-scrollbar {
+	width: 10px;
+}
+
+.hot-articles-nav-select::-webkit-scrollbar-thumb {
+	background-color: #513e3e;
+	border-radius: 10px;
+	background-clip: padding-box;
+	border: 2px solid transparent;
+}
+
+.hot-articles-nav-select::-webkit-scrollbar-track {
+	background-color: #bdb6b0;
+	border-radius: 10px;
+	box-shadow: inset 0px 0px 5px #bdb6b0;
+}

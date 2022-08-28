@@ -1,0 +1,188 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	min-width: 980px;
+	height: 100%;
+	font-size: 100%;
+}
+
+@font-face {
+	font-family: 'PyeongChangPeace-Bold';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Bold.woff2')
+		format('woff2');
+	font-weight: 700;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'LotteMartHappy';
+	font-style: normal;
+	font-weight: 400;
+	src:
+		url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartHappy/LotteMartHappyMedium.woff')
+		format('woff');
+}
+
+.gnb-root {
+	background-color: white;
+	color: var(- -color-gray900);
+}
+
+#mainSection {
+	margin: 0 auto;
+	padding: 80px 0px;
+	width: 1400px;
+	height: auto;
+}
+
+#footer-root {
+	clear: both;
+	color: white;
+	width: 100%;
+	height: 20px;
+	text-align: center;
+	background: #fdf3f5;
+}
+
+.other {
+	padding: 10px;
+}
+
+.other1 {
+	padding: 0px 10px 10px 10px;
+}
+
+.intro, .market, .shop {
+	font-family: 'LotteMartHappy';
+	margin: auto;
+	width: 100%;
+	height: 400px;
+}
+
+.intro {
+	background-color: #F8F9FA;
+}
+
+.market {
+	background-color: white;
+}
+
+.shop {
+	position: relative;
+	background-color: white;
+}
+
+#intro1, #intro2 {
+	padding: 10px;
+	height: auto;
+	float: left;
+}
+/*
+#intro1 img{
+   max-width: 100%;
+   width: auto;
+   height: auto;
+   align-self: center;
+}
+*/
+#intro2 {
+	position: relative;
+	margin-top: 90px;
+	font-size: 30px;
+}
+
+.button2, .button1 {
+	margin-top: 110px;
+	width: 40%;
+}
+
+#imgMarket {
+	border-radius: 100px;
+	width: 400px;
+	height: 270px;
+	float: left;
+	margin-top: 100px;
+}
+
+.button1 {
+	font-family: LotteMartHappy;
+	border-radius: 20px;
+	background: #E6F3E6;
+	color: gray;
+	border: none;
+	width: 300px;
+	height: 200px;
+	font-size: 50px;
+	padding: 0 2em;
+	cursor: pointer;
+	transition: 800ms ease all;
+	outline: none;
+	margin-top: 110px;
+	width: 40%;
+}
+
+.button2 {
+	font-family: LotteMartHappy;
+	border-radius: 20px;
+	background: #f9efa8;
+	color: gray;
+	border: none;
+	width: 300px;
+	height: 200px;
+	font-size: 50px;
+	padding: 0 2em;
+	cursor: pointer;
+	transition: 800ms ease all;
+	outline: none;
+	margin-top: 110px;
+	width: 40%;
+}
+
+button:hover {
+	background: #fff;
+	color: black;
+}
+
+button:before, button:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 2px;
+	width: 0;
+	background: #FF7E31;
+	transition: 400ms ease all;
+}
+
+button:after {
+	right: inherit;
+	top: inherit;
+	left: 0;
+	bottom: 0;
+}
+
+button:hover:before, button:hover:after {
+	transition: 800ms ease all;
+}
+
+.gnb-root a:link {
+	font-family: 'LotteMartHappy';
+	text-decoration: none;
+	font-size: 30px;
+	color: black;
+}
+
+.gnb-root a:visited {
+	color: black;
+}
+
+#infor p {
+	margin: 5px;
+	padding: 5px;
+	font-family: 'LotteMartHappy';
+	font-size: 20px;
+}

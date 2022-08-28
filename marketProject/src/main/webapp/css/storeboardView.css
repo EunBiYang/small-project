@@ -1,0 +1,567 @@
+@charset "UTF-8";
+
+* {
+    box-sizing: border-box;
+    font-family: 'LotteMartHappy';
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+   font-family: 'PyeongChangPeace-Bold';
+   src:
+      url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Bold.woff2')
+      format('woff2');
+   font-weight: 700;
+   font-style: normal;
+}
+
+@font-face {
+   font-family: 'LotteMartHappy';
+   font-style: normal;
+   font-weight: 400;
+   src:
+      url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartHappy/LotteMartHappyMedium.woff')
+      format('woff');
+}
+/*지역 카테고리 */
+#region1 .hot-articles-nav-select {
+	width: 180px;
+	margin-left: 8px;
+	appearance: none;
+	box-sizing: border-box;
+	font-size: 20px;
+	letter-spacing: -0.6px;
+	text-align: left;
+	padding: 12px 16px;
+	border-radius: 6px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: rgb(233, 236, 239);
+	border-image: initial;
+	color: #d5c4a1;
+	font-family: LotteMartHappy;
+}
+.hot-articles-nav-select {
+	width: 250px;
+	height: 50px;
+	overflow: auto;
+}
+
+.hot-articles-nav-select::-webkit-scrollbar {
+	width: 10px;
+}
+
+.hot-articles-nav-select::-webkit-scrollbar-thumb {
+	background-color: #513e3e;
+	border-radius: 10px;
+	background-clip: padding-box;
+	border: 2px solid transparent;
+}
+
+.hot-articles-nav-select::-webkit-scrollbar-track {
+	background-color: #bdb6b0;
+	border-radius: 10px;
+	box-shadow: inset 0px 0px 5px #bdb6b0;
+}
+
+/*nav css*/
+navbar {
+	display: block;
+}
+
+navbar-desktop {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+    height: 72px;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 7%);
+}
+
+resposive-contaniner {
+	display: block;
+    width: 100%;
+    max-width: 784px;
+    margin: 0 auto;
+}
+
+nav {
+    display: block;
+}
+
+row {
+	padding: 0 16px;
+	align-items: center;
+	display: flex;
+    flex-direction: row;
+    height: 28px;
+}
+
+.no-decoration {
+    text-decoration: none;
+    color: inherit;
+    vertical-align: bottom;
+    width: 100px;
+    padding: 4px;
+}
+
+.no-decoration a {
+    text-underline-position: under;
+}
+
+a, button {
+    cursor: pointer;
+}
+
+a, p {
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+.dongne-logo {
+	height: 28px;
+}
+
+span {
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 150%;
+    color: #2694ab;
+    letter-spacing: -.02em;
+    text-decoration: none;
+}
+
+.registration-button {
+	background-color: initial;
+    background-image: linear-gradient(-180deg, gray, black);
+    border-radius: 6px;
+    box-shadow: rgb(0 0 0 / 10%) 0 2px 4px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 15px;
+    font-family: LotteMartHappy;
+    height: 40px;
+    line-height: 40px;
+    outline: 0;
+    overflow: hidden;
+    padding: 3px;
+    pointer-events: auto;
+    position: relative;
+    text-align: center;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    vertical-align: top;
+    white-space: nowrap;
+    width: 100px;
+    z-index: 9;
+    border: 0;
+    transition: box-shadow .2s;
+}
+
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+} 
+
+/*중단 css*/
+responsive-container2 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    border-left: 1px solid #e9ecef;
+    border-right: 1px solid #e9ecef;
+    width: 100%;
+    max-width: 784px;
+    margin: 0 auto;
+}
+
+main {
+    position: relative;
+    padding-bottom: 36px;
+    display: block;
+}
+
+ba-detail {
+	display: block;
+}
+
+article {
+    background-color: #f8f9fa;
+    display: block;
+}
+
+section {
+    background: #fff;
+    display: block;
+}
+
+ba-detail-image-appbar {
+    display: block;
+    position: relative;
+    height: 276px;
+}
+
+.image-container {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+div {
+    display: block;
+}
+
+img {
+    object-fit: cover;
+}
+
+.dark-cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    background-color: #495057;
+    opacity: .7;
+}
+
+.appbar-container {
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.appbar-content {
+    color: #fff;
+    padding: 24px;
+    margin-top: auto;
+}
+
+.appbar-content h1 {
+    margin-top: 4px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 125%;
+    letter-spacing: -.03em;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    color: #fff;
+}
+
+h1 {
+	margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    margin: 0;
+}
+
+/*가게정보글 css*/
+.poi-info {
+    margin-top: 8px;
+    box-shadow: 0 1px 0 #f1f3f5;    
+}
+
+app-ba-detail-info {
+    display: block;
+    padding: 24px 16px;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
+li:first-child {
+    margin-top: 0;
+}
+
+li {
+	display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    text-align: -webkit-match-parent;  
+}
+
+li img {
+    width: 18px;
+    height: 18px;
+}
+
+.description {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: pre-line;
+}
+
+.appbar-content{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 150%;
+    letter-spacing: -.02em;
+    color: inherit;
+}
+
+.breadcrumbs {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 150%;
+    letter-spacing: -.02em;
+    color: inherit;
+    display: flex;
+    flex-direction: row;
+}
+
+.appbar-content .breadcrumbs p {
+    font-weight: 400;
+}
+
+.info-addr {
+    margin-left: 16px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    letter-spacing: -.02em;
+}
+
+.info-content {
+    margin-left: 16px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    letter-spacing: -.02em;
+}
+
+/*지도 css*/
+.map-container {
+    position: relative;
+    padding: 0 16px;
+}
+
+element.style {
+    position: relative;
+    overflow: hidden;
+    background: url(https://t1.daumcdn.net/mapjsapi/images/bg_tile.png);
+}
+
+#map {
+    height: 224px;
+}
+
+element.style {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+}
+
+.map-address {
+    background: #fff;
+    padding: 16px;
+}
+
+.address-road {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: -.02em;
+    color: #212529;
+}
+
+.click-overlay {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+/*댓글css*/
+#modify a{
+	 text-decoration: none;
+	  color:black;
+	  font-weight: 800;
+}
+
+#modify a img{
+	width: 20px;
+	height: 20px;
+}
+
+hr {
+    color: black;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+}
+
+form {
+    display: block;
+}
+
+#reply{
+	
+	width:650px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#reply a{
+	 text-decoration: none;
+	  color:black;
+}
+
+strong {
+    font-weight: bold;
+}
+
+element.style {
+    margin-bottom: 10px;
+}
+
+element.style {
+    vertical-align: middle;
+}
+
+#CommentWriter {
+	width:650px;
+	margin-left: auto;
+	margin-right: auto;
+    padding: 16px 10px 10px 18px;
+    border: 2px solid #dcdcdc;
+    border-radius: 6px;
+    box-sizing: border-box;
+	height:100px;
+}
+
+#replyContent{
+resize: none; 
+border: none; 
+width: 100%; 
+height: 25px; 
+word-wrap: break-word; 
+font-size: 17px; 
+overflow: hidden;
+}
+
+#reply_submit{
+cursor:pointer; 
+outline: none; 
+float:right; 
+border: none; 
+background: none;  
+-webkit-appearance: none;
+color: gray;
+}
+
+input[type="submit" i] {
+	user-select: none;
+    white-space: pre;
+    align-items: flex-start;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+input {
+    writing-mode: horizontal-tb !important;
+    font-style: ;
+    font-variant-ligatures: ;
+    font-variant-caps: ;
+    font-variant-numeric: ;
+    font-variant-east-asian: ;
+    font-weight: ;
+    font-stretch: ;
+    font-size: ;
+    font-family: ;
+    text-rendering: auto;
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+   	-webkit-rtl-ordering: logical;   
+}
+
+input[type="hidden" i] {
+    appearance: none;
+    background-color: initial;
+    cursor: default;
+    display: none !important;
+    border: initial;
+}
+
+textarea {
+    writing-mode: horizontal-tb !important;
+    font-style: ;
+    font-variant-ligatures: ;
+    font-variant-caps: ;
+    font-variant-numeric: ;
+    font-variant-east-asian: ;
+    font-weight: ;
+    font-stretch: ;
+    font-family: monospace;
+    text-rendering: auto;
+    color: fieldtext;
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    appearance: auto;
+    -webkit-rtl-ordering: logical;
+    cursor: text;
+    white-space: pre-wrap;
+    background-color: field;
+    column-count: initial !important;
+}
+
+textarea::placeholder {
+  color: gray;
+  
+}

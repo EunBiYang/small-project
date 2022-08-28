@@ -1,0 +1,921 @@
+-- Storeboard 테이블
+-- 1) 테이블 생성
+create table storeboard (
+    seq number not null,                 -- 글번호
+    id varchar2(30) not null,            -- 작성자id
+    name varchar2(30) not null,          -- 이름 
+    city varchar2(30) not null,         -- 시
+    gu varchar2(30) not null,            -- 구
+    re_ref number not null,              --원글 번호(seq)값과 동일
+    re_seq number not null,              --답글의 정렬을 위한 seq변수
+    re_lev number not null,              -- 답글의 레벨을 결정하는 변수(답글이 어느 글의 답글인지 분류)
+    storeName varchar2(100) not null,       -- 가게이름
+    storePlace varchar2(1000) not null,     -- 가게위치
+    storeNum varchar2(100) not null,               -- 가게 전화번호
+    storeCategory varchar2(20) not null,    -- 가게 카테고리
+    storeContent varchar2(4000) not null,   -- 가게소개
+    image1 varchar2(200),                   -- 이미지이름
+    logtime date default sysdate            -- 작성일
+);
+-- 2) 테이블 삭제
+drop table storeboard purge;
+-- 3) 테이블 목록 확인
+select * from tab;
+--- 검색
+select * from storeboard where storePlace like '%서%';
+-- 4) 시퀀스 객체 생성
+create sequence seq_storeboard nocache nocycle;
+-- 5) 시퀀스 객체 삭제
+drop sequence seq_storeboard;
+-- 6) 정의된 시퀀스 조회
+select * from user_storeboard;
+commit;
+
+
+-- 7) 데이터 저장 (insert)
+-- 서초구
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','서초구',seq_storeboard.currval,0,0, '별빛창가', '서울특별시 서초구 효령로68길 66',
+'01033369831', '카페', '싸다.맛있다.친절하고 매너가 좋고 동네사랑방 같다~', '별빛창가.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','서초구',seq_storeboard.currval,0,0, '디마르가리따', '서울특별시 서초구 효령로 202 서초빌딩 B1 디마르가리따',
+'0226370315', '카페', '예술의전당 맛집 카페로 영국식 애프터눈티세트 로 유명한 디마르가리따 티룸입니다~:)', '디마르가리따.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','서초구',seq_storeboard.currval,0,0, '파리서티세븐', '서울특별시 서초구 강남대로37길 12-7 1층',
+'050713940852', '카페', '프랑스풍의 예쁜 컨셉의 수제청디저트 전문 카페입니다', '파리서티세븐.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','서초구',seq_storeboard.currval,0,0, '체코베뻬', '서울특별시 서초구 서초대로40길 49 (서초동)',
+'025835595', '카페', '매장에서 직접 만드는 이태리정통 젤라또입니다.', '체코베뻬.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','서초구',seq_storeboard.currval,0,0, '이즈커피', '서울특별시 서초구 서초대로 334 브라운스톤서초',
+'01091430070', '카페', '16년 경력의 바리스타가 제대로 만듭니다', '이즈커피.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','서초구',seq_storeboard.currval,0,0, '파브리끄 양재점', '서울특별시 서초구 서운로6길 25',
+'01097694536', '카페', '신선한 생두로 직접 로스팅한 커피와 매장에서 직접 만드는 디저트를 제공합니다.', '파브리끄 양재점.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','서초구',seq_storeboard.currval,0,0, '미노커피', '서울특별시 서초구 방배로8길 14(방배동)',
+'025983851', '카페', '미노커피는 로스터리핸드드립 전문 카페입니다.', '미노커피.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','서초구',seq_storeboard.currval,0,0, '카페 무가공', '서울특별시 서초구 효령로 423 (서초동)',
+'025863715', '카페', '핸드드립 커피와 함께 독서와 전시를 즐길 수 있는 공간입니다! 층고가 높고 채광이 좋아 햇살 맛집이기도 해요', '카페 무가공.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','서초구',seq_storeboard.currval,0,0, '푸엘라카페', '서울특별시 서초구 강남대로93길 6 (잠원동)',
+'01027992881', '카페', '논현역과 신사역 사이에 있는 푸엘라 카페입니다', '푸엘라카페.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','서초구',seq_storeboard.currval,0,0, '카페네이슨', '서울특별시 서초구 바우뫼로 23',
+'07042479642', '카페', '매일아침 신선한 원두를 로스팅한 2천원 아메리카노로 하루를 힐링하세요', '카페네이슨.jpg', sysdate);
+
+-- 강남구
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','강남구',seq_storeboard.currval,0,0, '커피#', '서울특별시 강남구 도산대로1길 3(신사동)',
+'01053491331', '카페', '신사동에 싸고 맛있는 포트캔커피 입니다. 고급원재료를 사용하여 저렴하게 고객님들께 맛있는 커피를 판매합니다.', '커피#.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','강남구',seq_storeboard.currval,0,0, '카페캠프통', '서울특별시 강남구 신사동 643-22',
+'0234450369', '카페', '카페 캠프통 압구정살롱은 이제껏 볼 수 없던 지하1층~지상4층의 연면적 1700평의 국내 최대 규모로 프리미엄 커피부터 신선한 빵과 음식, 
+그리고 카페 캠프통 앱과 연동된 내부 시설 및 서비스까지 즐길 수 있는 살롱 카페입니다.', '카페캠프통.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','강남구',seq_storeboard.currval,0,0, '이니스플라워 카페', '서울특별시 강남구 압구정로 326',
+'01053913922', '카페', '아메리카노3500원, 카페라떼 4000원, 오렌지라떼 5500원', '이니스플라워 카페.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','강남구',seq_storeboard.currval,0,0, '크로네', '서울특별시 강남구 논현로175길 40 서운빌딩 104호',
+'025148759', '카페', '압구정역에서 가로수길 방향 플라워 카페 크로네입니다.', '크로네.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','강남구',seq_storeboard.currval,0,0, '데일리청담', '서울특별시 강남구 선릉로152길 21 (청담동)',
+'01043340896', '카페', '청담을 대표하는 공간 데일리청담 - [카페, 브런치, 다이닝, 라운지]', '데일리청담.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','강남구',seq_storeboard.currval,0,0, '코지아일랜드', '서울특별시 강남구 가로수길 31-5 (신사동)',
+'01038656482', '카페', '가로수길 크로플맛집 코지아일랜드입니다. 크로플과 맛있는 브런치가 있는 감성카페입니다.', '코지아일랜드.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','강남구',seq_storeboard.currval,0,0, '천장지구', '서울특별시 강남구 언주로150길 51 2층',
+'01024693324', '카페', '국제커피감별사 백승준 바리스타의 세번째 가게 오리엔탈리즘 인테리어의 천장지구 입니다.', '천장지구.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','강남구',seq_storeboard.currval,0,0, '에이쓰리', '서울특별시 강남구 강남대로154길 19 (신사동)',
+'027040701', '카페', '로스팅 배전소로 다양한 싱글 오리진 커피를 맛 볼 수 있고, 3가지 블렌딩 커피를 준비하고 있습니다.', '에이쓰리.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','강남구',seq_storeboard.currval,0,0, '쁘띠팔레', '서울특별시 강남구 선릉로135길 13 (논현동)',
+'0234442550', '카페', '프랑스 작은 궁전으로 초대합니다.', '쁘띠팔레.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','강남구',seq_storeboard.currval,0,0, '5스타커피', '서울특별시 강남구 학동로43길 38 논현웰스톤',
+'024622020', '카페', '스페셜티커피와 원두를 구매할 수 있음', '5스타커피.jpg', sysdate);
+----강동구
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','강동구',seq_storeboard.currval,0,0, '해임시', '서울 강동구 천호대로157길 26 4층',
+'050713600065', '음식점', '저희는 내추럴 와인, 전통주, 칵테일 그와 어울리는 여러 음식들을 제공하고 있습니다.', 'haeimsi.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','강동구',seq_storeboard.currval,0,0, '안녕식당', '서울 강동구 천호대로159길 53',
+'024730543', '음식점', '연어덮밥과 일본식짬뽕이 맛있는 일본가정식맛집', 'hello.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','강동구',seq_storeboard.currval,0,0, '우양우', '서울 강동구 천호옛14길 36 1층',
+'050713668986', '음식점', '농림축산식품부 제공 소고기 안심식당', '우양우.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','강동구',seq_storeboard.currval,0,0, '풍년상회', '서울 강동구 천호옛14길 23-6',
+'024780555', '음식점', '천호 쪽갈비 절대 실패없는 맛집', '풍년상회.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','강동구',seq_storeboard.currval,0,0, '갓잇', '서울 강동구 성안로 14',
+'024859451', '음식점', 'GOD EAT은 신이 먹을만큼 맛있고 건강한 음식이라는 브랜드 이념으로 탄생한 멕시칸 음식점 입니다.', '갓잇.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','강동구',seq_storeboard.currval,0,0, '브랜뉴하이몬드', '서울 강동구 천호옛14길 11 브랜뉴하이몬드 1, 2층',
+'024782402', '카페', '카페 드 하이몬드 디저트와 빵이 맛있는 천호동 카페', '브랜뉴하이몬드.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','강동구',seq_storeboard.currval,0,0, '미드데이썬', '서울 강동구 양재대로91나길 55',
+'050713691308', '카페', '수플레 케이크 전문 카페', '미드데이썬.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'강동구',seq_storeboard.currval,0,0, '평상시','서울 강동구 고덕로20길 26 1층',
+'050713118816', '카페', '2017년 강동구 암사동에서 시작한 평상시는
+비건 디저트를 중심으로 뚜렷한 정체성을 담아 탄생한 로컬 브랜드입니다.', '평상시.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'강동구',seq_storeboard.currval,0,0, '채스우드커피','서울 강동구 성안로 42 1층',
+'050713154357', '카페', '2호주식 스타일의커피와 베이커리 친근한 분위기로 편안한 느낌을 드리겠습니다', '채스우드커피.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'강동구',seq_storeboard.currval,0,0, '우드멜로우','서울 강동구 아리수로 243',
+'0234272235', '카페', '루프탑이 이쁜 카페', '우드멜로우.jpg', sysdate);
+
+--강북구
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'강북구',seq_storeboard.currval,0,0, '제일분식','서울 강북구 숭인로 65-3',
+'029857333', '음식점', '미아삼거리 숭인시장 내에 자리한 분식점입니다. 매콤한 양념에 두툼한 오뎅이 어우러진 쌀 떡볶이를 저렴한 가격에 맛볼 수 있지요.', '제일분식.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'강북구',',seq_storeboard.currval,0,0, '미림산장','서울 강북구 삼양로181길 253 우이동미림산장',
+'029933330', '음식점', '한정식, 왕갈비, 오리로스, 백숙, 보신탕, 매기매운탕.', '미림산장.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'강북구',seq_storeboard.currval,0,0, '카페 산아래','서울 강북구 삼양로181길 56 102호',
+'050713528813', '음식점', '한정식, 왕갈비, 오리로스, 백숙, 보신탕, 매기매운탕.', '카페산아래.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'강북구',seq_storeboard.currval,0,0, '어셈블','서울 강북구 한천로 1007 1층',
+'050714092813', '카페', '이쁜 인테리어와 맛있는 유자민트티', '어셈블.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'강북구',seq_storeboard.currval,0,0, '무너미','서울 강북구 노해로8가길 40',
+'029035058', '카페', '치즈케이크가 전문인 카페입니다.예쁘고 다양한 치즈케이크가 선물용으로도 좋습니다.', '무너미.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'강북구',seq_storeboard.currval,0,0, '무너미','서울 강북구 노해로8가길 40',
+'029035058', '카페', '치즈케이크가 전문인 카페입니다.예쁘고 다양한 치즈케이크가 선물용으로도 좋습니다.', '무너미.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'강북구',seq_storeboard.currval,0,0, '백란','서울 강북구 삼양로181길 201-20',
+'029937745', '카페', '깊고 진한 맛의 커피와 곁들일 수 있는 다양한 베이커리 메뉴도 준비되어있습니다.', '백란.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'강북구',seq_storeboard.currval,0,0, '백란','서울 강북구 삼양로181길 201-20',
+'029937745', '카페', '깊고 진한 맛의 커피와 곁들일 수 있는 다양한 베이커리 메뉴도 준비되어있습니다.', '백란.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'강북구',seq_storeboard.currval,0,0, '용인가든','서울 강북구 우이동 224-12',
+'029930048', '음식점', '북한산 우이천가에 자리 잡은 한식당입니다. ', '용인가든.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'강북구',seq_storeboard.currval,0,0, '옥류헌릴렉스','서울 강북구 삼양로181길 142 옥류정',
+'029931829', '음식점', '4대째 전통 한정식과 자연 먹거리만을 고집하는 옥류헌입니다. ', '옥류헌릴렉스.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'강북구',seq_storeboard.currval,0,0, '아띠랑스','서울 강북구 4.19로 42-1 1,2층',
+'050713032621', '카페', '맛있는 수제쿠키와 수제스콘을 드실수 있습니다
+부드러운 아메리카노와 고운 거품이 올라간 라떼를 맛 볼 수 있는 매장입니다. ', '아띠랑스.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'강북구',seq_storeboard.currval,0,0, '저스트라운지','서울 강북구 한천로139길 42 영남빌딩 1층 102호',
+'050714415677','카페', '낮에는 카페,저녁에는 디제잉바로 운영되는 라운지 펍 라운지 운영시간에도 카페이용이 가능합니다 ', '저스트라운지.jpg', sysdate);
+
+---강서구
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','강서구',seq_storeboard.currval,0,0, '별빛창가', '서울특별시 서초구 효령로68길 66',
+'01033369831', '카페', '싸다.맛있다.친절하고 매너가 좋고 동네사랑방 같다~', '별빛창가.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','강서구',seq_storeboard.currval,0,0, '디마르가리따', '서울 강서구 마곡중앙로 59-5 마곡595빌딩 1, 2층',
+'0226370315', '카페', '예술의전당 맛집 카페로 영국식 애프터눈티세트 로 유명한 디마르가리따 티룸입니다~:)', '디마르가리따.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','강서구',seq_storeboard.currval,0,0, '파리서티세븐', '서울 강서구 공항대로 261 발산파크프라자 206호',
+'050713940852', '카페', '프랑스풍의 예쁜 컨셉의 수제청디저트 전문 카페입니다', '파리서티세븐.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','강서구',seq_storeboard.currval,0,0, '체코베뻬', '서울 강서구 마곡중앙로 161-1 캐슬파크 2층 220호',
+'025835595', '카페', '매장에서 직접 만드는 이태리정통 젤라또입니다.', '체코베뻬.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','강서구',seq_storeboard.currval,0,0, '이즈커피', '서울 강서구 강서로 318 1층 카페 어나더사이드',
+'01091430070', '카페', '16년 경력의 바리스타가 제대로 만듭니다', '이즈커피.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','강서구',seq_storeboard.currval,0,0, '파브리끄 양재점', '서울 강서구 공항대로 228 리더스타워 117호',
+'01097694536', '카페', '신선한 생두로 직접 로스팅한 커피와 매장에서 직접 만드는 디저트를 제공합니다.', '파브리끄 양재점.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','강서구',seq_storeboard.currval,0,0, '미노커피', '서울 강서구 마곡중앙4로 22 A동 120호',
+'025983851', '카페', '미노커피는 로스터리핸드드립 전문 카페입니다.', '미노커피.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','강서구',seq_storeboard.currval,0,0, '카페 무가공', '서울 강서구 마곡중앙5로 6 보타닉푸르지오시티 지하 1층 143호 엘리케이커',
+'025863715', '카페', '핸드드립 커피와 함께 독서와 전시를 즐길 수 있는 공간입니다! 층고가 높고 채광이 좋아 햇살 맛집이기도 해요', '카페 무가공.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','강서구',seq_storeboard.currval,0,0, '푸엘라카페', '서울 강서구 등촌로53길 10 천우네오젠아파트 101호',
+'01027992881', '카페', '논현역과 신사역 사이에 있는 푸엘라 카페입니다', '푸엘라카페.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','강서구',seq_storeboard.currval,0,0, '카페네이슨', '서울 강서구 마곡중앙6로 10 103호(마곡센트럴푸르지오)',
+'07042479642', '카페', '매일아침 신선한 원두를 로스팅한 2천원 아메리카노로 하루를 힐링하세요', '카페네이슨.jpg', sysdate);
+
+---관악구
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','관악구',seq_storeboard.currval,0,0, '별빛창가', '서울특별시 서초구 효령로68길 66',
+'01033369831', '카페', '싸다.맛있다.친절하고 매너가 좋고 동네사랑방 같다~', '별빛창가.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','관악구',seq_storeboard.currval,0,0, '디마르가리따', '서울 관악구 낙성대역길 8',
+'0226370315', '카페', '예술의전당 맛집 카페로 영국식 애프터눈티세트 로 유명한 디마르가리따 티룸입니다~:)', '디마르가리따.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','관악구',seq_storeboard.currval,0,0, '파리서티세븐', '서울 관악구 낙성대역길 8',
+'050713940852', '카페', '프랑스풍의 예쁜 컨셉의 수제청디저트 전문 카페입니다', '파리서티세븐.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','관악구',seq_storeboard.currval,0,0, '체코베뻬', '서울 관악구 낙성대역길 8',
+'025835595', '카페', '매장에서 직접 만드는 이태리정통 젤라또입니다.', '체코베뻬.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','관악구',seq_storeboard.currval,0,0, '이즈커피', '서울 관악구 낙성대역길 8',
+'01091430070', '카페', '16년 경력의 바리스타가 제대로 만듭니다', '이즈커피.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','관악구',seq_storeboard.currval,0,0, '파브리끄 양재점', '서울 관악구 낙성대역길 8',
+'01097694536', '카페', '신선한 생두로 직접 로스팅한 커피와 매장에서 직접 만드는 디저트를 제공합니다.', '파브리끄 양재점.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','관악구',seq_storeboard.currval,0,0, '미노커피', '서울 관악구 낙성대역길 8',
+'025983851', '카페', '미노커피는 로스터리핸드드립 전문 카페입니다.', '미노커피.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','관악구',seq_storeboard.currval,0,0, '카페 무가공', '서울 관악구 낙성대역길 8',
+'025863715', '카페', '핸드드립 커피와 함께 독서와 전시를 즐길 수 있는 공간입니다! 층고가 높고 채광이 좋아 햇살 맛집이기도 해요', '카페 무가공.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','관악구',seq_storeboard.currval,0,0, '푸엘라카페', '서울 관악구 낙성대역길 8',
+'01027992881', '카페', '논현역과 신사역 사이에 있는 푸엘라 카페입니다', '푸엘라카페.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','관악구',seq_storeboard.currval,0,0, '카페네이슨', '서울 관악구 낙성대역길 8',
+'07042479642', '카페', '매일아침 신선한 원두를 로스팅한 2천원 아메리카노로 하루를 힐링하세요', '카페네이슨.jpg', sysdate);
+
+--광진구
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','광진구',seq_storeboard.currval,0,0, '별빛창가', '서울 광진구 아차산로31길 40',
+'01033369831', '카페', '싸다.맛있다.친절하고 매너가 좋고 동네사랑방 같다~', '별빛창가.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','광진구','nextval',seq_storeboard.currval,0,0, '디마르가리따', '서울 광진구 아차산로31길 40',
+'0226370315', '카페', '예술의전당 맛집 카페로 영국식 애프터눈티세트 로 유명한 디마르가리따 티룸입니다~:)', '디마르가리따.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','광진구','nextval',seq_storeboard.currval,0,0, '파리서티세븐', '서울 광진구 아차산로31길 40',
+'050713940852', '카페', '프랑스풍의 예쁜 컨셉의 수제청디저트 전문 카페입니다', '파리서티세븐.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','광진구','nextval',seq_storeboard.currval,0,0, '체코베뻬', '서울 광진구 아차산로31길 40',
+'025835595', '카페', '매장에서 직접 만드는 이태리정통 젤라또입니다.', '체코베뻬.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','광진구','nextval',seq_storeboard.currval,0,0, '이즈커피', '서울 광진구 아차산로31길 40',
+'01091430070', '카페', '16년 경력의 바리스타가 제대로 만듭니다', '이즈커피.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','광진구','nextval',seq_storeboard.currval,0,0, '파브리끄 양재점', '서울 광진구 아차산로31길 40',
+'01097694536', '카페', '신선한 생두로 직접 로스팅한 커피와 매장에서 직접 만드는 디저트를 제공합니다.', '파브리끄 양재점.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','광진구','nextval',seq_storeboard.currval,0,0, '미노커피', '서울 광진구 아차산로31길 40',
+'025983851', '카페', '미노커피는 로스터리핸드드립 전문 카페입니다.', '미노커피.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','광진구','nextval',seq_storeboard.currval,0,0, '카페 무가공', '서울 광진구 아차산로31길 40',
+'025863715', '카페', '핸드드립 커피와 함께 독서와 전시를 즐길 수 있는 공간입니다! 층고가 높고 채광이 좋아 햇살 맛집이기도 해요', '카페 무가공.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','광진구','nextval',seq_storeboard.currval,0,0, '푸엘라카페', '서울 광진구 아차산로31길 40',
+'01027992881', '카페', '논현역과 신사역 사이에 있는 푸엘라 카페입니다', '푸엘라카페.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','광진구','nextval',seq_storeboard.currval,0,0, '카페네이슨', '서울 광진구 아차산로31길 40',
+'07042479642', '카페', '매일아침 신선한 원두를 로스팅한 2천원 아메리카노로 하루를 힐링하세요', '카페네이슨.jpg', sysdate);
+
+--구로구
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','구로구','nextval',seq_storeboard.currval,0,0, '별빛창가', '서울 구로구 디지털로32나길 51',
+'01033369831', '카페', '싸다.맛있다.친절하고 매너가 좋고 동네사랑방 같다~', '별빛창가.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','구로구','nextval',seq_storeboard.currval,0,0, '디마르가리따', '서울 구로구 디지털로32나길 51',
+'0226370315', '카페', '예술의전당 맛집 카페로 영국식 애프터눈티세트 로 유명한 디마르가리따 티룸입니다~:)', '디마르가리따.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','구로구','nextval',seq_storeboard.currval,0,0, '파리서티세븐', '서울 구로구 디지털로32나길 51',
+'050713940852', '카페', '프랑스풍의 예쁜 컨셉의 수제청디저트 전문 카페입니다', '파리서티세븐.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','구로구','nextval',seq_storeboard.currval,0,0, '체코베뻬', '서울 구로구 디지털로32나길 51',
+'025835595', '카페', '매장에서 직접 만드는 이태리정통 젤라또입니다.', '체코베뻬.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','구로구','nextval',seq_storeboard.currval,0,0, '이즈커피', '서울 구로구 디지털로32나길 51',
+'01091430070', '카페', '16년 경력의 바리스타가 제대로 만듭니다', '이즈커피.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','구로구','nextval',seq_storeboard.currval,0,0, '파브리끄 양재점', '서울 구로구 디지털로32나길 51',
+'01097694536', '카페', '신선한 생두로 직접 로스팅한 커피와 매장에서 직접 만드는 디저트를 제공합니다.', '파브리끄 양재점.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','구로구','nextval',seq_storeboard.currval,0,0, '미노커피', '서울 구로구 디지털로32나길 51',
+'025983851', '카페', '미노커피는 로스터리핸드드립 전문 카페입니다.', '미노커피.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','구로구','nextval',seq_storeboard.currval,0,0, '카페 무가공', '서울 구로구 디지털로32나길 51',
+'025863715', '카페', '핸드드립 커피와 함께 독서와 전시를 즐길 수 있는 공간입니다! 층고가 높고 채광이 좋아 햇살 맛집이기도 해요', '카페 무가공.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','구로구','nextval',seq_storeboard.currval,0,0, '푸엘라카페', '서울 구로구 디지털로32나길 51',
+'01027992881', '카페', '논현역과 신사역 사이에 있는 푸엘라 카페입니다', '푸엘라카페.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','구로구','nextval',seq_storeboard.currval,0,0, '카페네이슨', '서울 구로구 디지털로32나길 51',
+'07042479642', '카페', '매일아침 신선한 원두를 로스팅한 2천원 아메리카노로 하루를 힐링하세요', '카페네이슨.jpg', sysdate);
+
+--금천구
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','금천구','nextval',seq_storeboard.currval,0,0, '별빛창가', '서울 금천구 벚꽃로56길 182 104호',
+'01033369831', '카페', '싸다.맛있다.친절하고 매너가 좋고 동네사랑방 같다~', '별빛창가.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','금천구','nextval',seq_storeboard.currval,0,0, '디마르가리따', '서울 금천구 벚꽃로56길 182 104호',
+'0226370315', '카페', '예술의전당 맛집 카페로 영국식 애프터눈티세트 로 유명한 디마르가리따 티룸입니다~:)', '디마르가리따.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','금천구','nextval',seq_storeboard.currval,0,0, '파리서티세븐', '서울 금천구 벚꽃로56길 182 104호',
+'050713940852', '카페', '프랑스풍의 예쁜 컨셉의 수제청디저트 전문 카페입니다', '파리서티세븐.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','금천구','nextval',seq_storeboard.currval,0,0, '체코베뻬', '서울 금천구 벚꽃로56길 182 104호',
+'025835595', '카페', '매장에서 직접 만드는 이태리정통 젤라또입니다.', '체코베뻬.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','금천구','nextval',seq_storeboard.currval,0,0, '이즈커피', '서울 금천구 벚꽃로56길 182 104호',
+'01091430070', '카페', '16년 경력의 바리스타가 제대로 만듭니다', '이즈커피.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','금천구','nextval',seq_storeboard.currval,0,0, '파브리끄 양재점', '서울 금천구 벚꽃로56길 182 104호',
+'01097694536', '카페', '신선한 생두로 직접 로스팅한 커피와 매장에서 직접 만드는 디저트를 제공합니다.', '파브리끄 양재점.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','금천구','nextval',seq_storeboard.currval,0,0, '미노커피', '서울 금천구 벚꽃로56길 182 104호',
+'025983851', '카페', '미노커피는 로스터리핸드드립 전문 카페입니다.', '미노커피.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','금천구','nextval',seq_storeboard.currval,0,0, '카페 무가공', '서울 금천구 벚꽃로56길 182 104호',
+'025863715', '카페', '핸드드립 커피와 함께 독서와 전시를 즐길 수 있는 공간입니다! 층고가 높고 채광이 좋아 햇살 맛집이기도 해요', '카페 무가공.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','금천구','nextval',seq_storeboard.currval,0,0, '푸엘라카페', '서울 금천구 벚꽃로56길 182 104호',
+'01027992881', '카페', '논현역과 신사역 사이에 있는 푸엘라 카페입니다', '푸엘라카페.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','금천구','nextval',seq_storeboard.currval,0,0, '카페네이슨', '서울 금천구 벚꽃로56길 182 104호',
+'07042479642', '카페', '매일아침 신선한 원두를 로스팅한 2천원 아메리카노로 하루를 힐링하세요', '카페네이슨.jpg', sysdate);
+
+--노원구
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','노원구','nextval',seq_storeboard.currval,0,0, '별빛창가', '서울 노원구 동일로174길 37-16 1층',
+'01033369831', '카페', '싸다.맛있다.친절하고 매너가 좋고 동네사랑방 같다~', '별빛창가.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','노원구','nextval',seq_storeboard.currval,0,0, '디마르가리따', '서울 노원구 동일로174길 37-16 1층',
+'0226370315', '카페', '예술의전당 맛집 카페로 영국식 애프터눈티세트 로 유명한 디마르가리따 티룸입니다~:)', '디마르가리따.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','노원구','nextval',seq_storeboard.currval,0,0, '파리서티세븐', '서울 노원구 동일로174길 37-16 1층',
+'050713940852', '카페', '프랑스풍의 예쁜 컨셉의 수제청디저트 전문 카페입니다', '파리서티세븐.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','노원구','nextval',seq_storeboard.currval,0,0, '체코베뻬', '서울 노원구 동일로174길 37-16 1층',
+'025835595', '카페', '매장에서 직접 만드는 이태리정통 젤라또입니다.', '체코베뻬.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','노원구','nextval',seq_storeboard.currval,0,0, '이즈커피', '서울 노원구 동일로174길 37-16 1층',
+'01091430070', '카페', '16년 경력의 바리스타가 제대로 만듭니다', '이즈커피.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','노원구','nextval',seq_storeboard.currval,0,0, '파브리끄 양재점', '서울 노원구 동일로174길 37-16 1층',
+'01097694536', '카페', '신선한 생두로 직접 로스팅한 커피와 매장에서 직접 만드는 디저트를 제공합니다.', '파브리끄 양재점.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','노원구','nextval',seq_storeboard.currval,0,0, '미노커피', '서울 노원구 동일로174길 37-16 1층',
+'025983851', '카페', '미노커피는 로스터리핸드드립 전문 카페입니다.', '미노커피.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','노원구','nextval',seq_storeboard.currval,0,0, '카페 무가공', '서울 노원구 동일로174길 37-16 1층',
+'025863715', '카페', '핸드드립 커피와 함께 독서와 전시를 즐길 수 있는 공간입니다! 층고가 높고 채광이 좋아 햇살 맛집이기도 해요', '카페 무가공.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','노원구','nextval',seq_storeboard.currval,0,0, '푸엘라카페', '서울 노원구 동일로174길 37-16 1층',
+'01027992881', '카페', '논현역과 신사역 사이에 있는 푸엘라 카페입니다', '푸엘라카페.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','노원구','nextval',seq_storeboard.currval,0,0, '카페네이슨', '서울 노원구 동일로174길 37-16 1층',
+'07042479642', '카페', '매일아침 신선한 원두를 로스팅한 2천원 아메리카노로 하루를 힐링하세요', '카페네이슨.jpg', sysdate);
+
+--도봉구
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','도봉구','nextval',seq_storeboard.currval,0,0, '별빛창가', '서울 도봉구 도봉로118길 6-8 1층',
+'01033369831', '카페', '싸다.맛있다.친절하고 매너가 좋고 동네사랑방 같다~', '별빛창가.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','도봉구','nextval',seq_storeboard.currval,0,0, '디마르가리따', '서울 도봉구 도봉로118길 6-8 1층',
+'0226370315', '카페', '예술의전당 맛집 카페로 영국식 애프터눈티세트 로 유명한 디마르가리따 티룸입니다~:)', '디마르가리따.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','도봉구','nextval',seq_storeboard.currval,0,0, '파리서티세븐', '서울 도봉구 도봉로118길 6-8 1층',
+'050713940852', '카페', '프랑스풍의 예쁜 컨셉의 수제청디저트 전문 카페입니다', '파리서티세븐.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','도봉구','nextval',seq_storeboard.currval,0,0, '체코베뻬', '서울 도봉구 도봉로118길 6-8 1층',
+'025835595', '카페', '매장에서 직접 만드는 이태리정통 젤라또입니다.', '체코베뻬.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','도봉구','nextval',seq_storeboard.currval,0,0, '이즈커피', '서울 도봉구 도봉로118길 6-8 1층',
+'01091430070', '카페', '16년 경력의 바리스타가 제대로 만듭니다', '이즈커피.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','도봉구','nextval',seq_storeboard.currval,0,0, '파브리끄 양재점', '서울 도봉구 도봉로118길 6-8 1층',
+'01097694536', '카페', '신선한 생두로 직접 로스팅한 커피와 매장에서 직접 만드는 디저트를 제공합니다.', '파브리끄 양재점.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','도봉구','nextval',seq_storeboard.currval,0,0, '미노커피', '서울 도봉구 도봉로118길 6-8 1층',
+'025983851', '카페', '미노커피는 로스터리핸드드립 전문 카페입니다.', '미노커피.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','도봉구','nextval',seq_storeboard.currval,0,0, '카페 무가공', '서울 도봉구 도봉로118길 6-8 1층',
+'025863715', '카페', '핸드드립 커피와 함께 독서와 전시를 즐길 수 있는 공간입니다! 층고가 높고 채광이 좋아 햇살 맛집이기도 해요', '카페 무가공.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','도봉구','nextval',seq_storeboard.currval,0,0, '푸엘라카페', '서울 도봉구 도봉로118길 6-8 1층',
+'01027992881', '카페', '논현역과 신사역 사이에 있는 푸엘라 카페입니다', '푸엘라카페.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','도봉구','nextval',seq_storeboard.currval,0,0, '카페네이슨', '서울 도봉구 도봉로118길 6-8 1층',
+'07042479642', '카페', '매일아침 신선한 원두를 로스팅한 2천원 아메리카노로 하루를 힐링하세요', '카페네이슨.jpg', sysdate);
+
+--동대문구
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','동대문구','nextval',seq_storeboard.currval,0,0, '별빛창가', '서울 동대문구 회기로 164',
+'01033369831', '카페', '싸다.맛있다.친절하고 매너가 좋고 동네사랑방 같다~', '별빛창가.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','동대문구','nextval',seq_storeboard.currval,0,0, '디마르가리따', '서울 동대문구 회기로 164',
+'0226370315', '카페', '예술의전당 맛집 카페로 영국식 애프터눈티세트 로 유명한 디마르가리따 티룸입니다~:)', '디마르가리따.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','동대문구','nextval',seq_storeboard.currval,0,0, '파리서티세븐', '서울 동대문구 회기로 164',
+'050713940852', '카페', '프랑스풍의 예쁜 컨셉의 수제청디저트 전문 카페입니다', '파리서티세븐.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','동대문구','nextval',seq_storeboard.currval,0,0, '체코베뻬', '서울 동대문구 회기로 164',
+'025835595', '카페', '매장에서 직접 만드는 이태리정통 젤라또입니다.', '체코베뻬.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','동대문구','nextval',seq_storeboard.currval,0,0, '이즈커피', '서울 동대문구 회기로 164',
+'01091430070', '카페', '16년 경력의 바리스타가 제대로 만듭니다', '이즈커피.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','동대문구','nextval',seq_storeboard.currval,0,0, '파브리끄 양재점', '서울 동대문구 회기로 164',
+'01097694536', '카페', '신선한 생두로 직접 로스팅한 커피와 매장에서 직접 만드는 디저트를 제공합니다.', '파브리끄 양재점.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','동대문구','nextval',seq_storeboard.currval,0,0, '미노커피', '서울 동대문구 회기로 164',
+'025983851', '카페', '미노커피는 로스터리핸드드립 전문 카페입니다.', '미노커피.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','동대문구','nextval',seq_storeboard.currval,0,0, '카페 무가공', '서울 동대문구 회기로 164',
+'025863715', '카페', '핸드드립 커피와 함께 독서와 전시를 즐길 수 있는 공간입니다! 층고가 높고 채광이 좋아 햇살 맛집이기도 해요', '카페 무가공.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','동대문구','nextval',seq_storeboard.currval,0,0, '푸엘라카페', '서울 동대문구 회기로 164',
+'01027992881', '카페', '논현역과 신사역 사이에 있는 푸엘라 카페입니다', '푸엘라카페.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시','동대문구','nextval',seq_storeboard.currval,0,0, '카페네이슨', '서울 동대문구 회기로 164',
+'07042479642', '카페', '매일아침 신선한 원두를 로스팅한 2천원 아메리카노로 하루를 힐링하세요', '카페네이슨.jpg', sysdate);
+
+--마포구
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'마포구','seq_storeboard.currval,0,0, '제일분식','서울 마포구 동교로 255-1 1층',
+'029857333', '음식점', '미아삼거리 숭인시장 내에 자리한 분식점입니다. ', '제일분식.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'마포구','seq_storeboard.currval,0,0, '미림산장','서울 마포구 동교로 255-1 1층',
+'029933330', '음식점', '한정식, 왕갈비, 오리로스, 백숙, 보신탕, 매기매운탕.', '미림산장.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'마포구','seq_storeboard.currval,0,0, '카페 산아래','서울 마포구 동교로 255-1 1층',
+'050713528813', '음식점', '한정식, 왕갈비, 오리로스, 백숙, 보신탕, 매기매운탕.', '카페산아래.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'마포구','seq_storeboard.currval,0,0, '어셈블','서울 마포구 동교로 255-1 1층',
+'050714092813', '카페', '이쁜 인테리어와 맛있는 유자민트티', '어셈블.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'마포구','seq_storeboard.currval,0,0, '무너미','서울 마포구 동교로 255-1 1층',
+'029035058', '카페', '치즈케이크가 전문인 카페입니다.예쁘고 다양한 치즈케이크가 선물용으로도 좋습니다.', '무너미.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'마포구','seq_storeboard.currval,0,0, '무너미','서울 마포구 동교로 255-1 1층',
+'029035058', '카페', '치즈케이크가 전문인 카페입니다.예쁘고 다양한 치즈케이크가 선물용으로도 좋습니다.', '무너미.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'마포구','seq_storeboard.currval,0,0, '백란','서울 마포구 동교로 255-1 1층',
+'029937745', '카페', '깊고 진한 맛의 커피와 곁들일 수 있는 다양한 베이커리 메뉴도 준비되어있습니다.', '백란.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'마포구','seq_storeboard.currval,0,0, '백란','서울 마포구 동교로 255-1 1층',
+'029937745', '카페', '깊고 진한 맛의 커피와 곁들일 수 있는 다양한 베이커리 메뉴도 준비되어있습니다.', '백란.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'마포구','seq_storeboard.currval,0,0, '용인가든','서울 마포구 동교로 255-1 1층',
+'029930048', '음식점', '북한산 우이천가에 자리 잡은 한식당입니다. ', '용인가든.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'마포구','seq_storeboard.currval,0,0, '옥류헌릴렉스','서울 마포구 동교로 255-1 1층',
+'029931829', '음식점', '4대째 전통 한정식과 자연 먹거리만을 고집하는 옥류헌입니다. ', '옥류헌릴렉스.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'마포구','seq_storeboard.currval,0,0, '아띠랑스','서울 마포구 동교로 255-1 1층',
+'050713032621', '카페', '부드러운 아메리카노와 고운 거품이 올라간 라떼를 맛 볼 수 있는 매장입니다. ', '아띠랑스.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'마포구','seq_storeboard.currval,0,0, '저스트라운지','서울 마포구 동교로 255-1 1층',
+'050714415677','카페', '낮에는 카페,저녁에는 디제잉바로 운영되는 라운지 펍 라운지 운영시간에도 카페이용이 가능합니다 ', '저스트라운지.jpg', sysdate);
+
+--성북구
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'성북구','seq_storeboard.currval,0,0, '제일분식','서울 성북구 종암로38길 16',
+'029857333', '음식점', '미아삼거리 숭인시장 내에 자리한 분식점입니다. ', '제일분식.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'성북구','seq_storeboard.currval,0,0, '미림산장','서울 성북구 종암로38길 16',
+'029933330', '음식점', '한정식, 왕갈비, 오리로스, 백숙, 보신탕, 매기매운탕.', '미림산장.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'성북구','seq_storeboard.currval,0,0, '카페 산아래','서울 성북구 종암로38길 16',
+'050713528813', '음식점', '한정식, 왕갈비, 오리로스, 백숙, 보신탕, 매기매운탕.', '카페산아래.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'성북구','seq_storeboard.currval,0,0, '어셈블','서울 성북구 종암로38길 16',
+'050714092813', '카페', '이쁜 인테리어와 맛있는 유자민트티', '어셈블.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'성북구','seq_storeboard.currval,0,0, '무너미','서울 성북구 종암로38길 16',
+'029035058', '카페', '치즈케이크가 전문인 카페입니다.예쁘고 다양한 치즈케이크가 선물용으로도 좋습니다.', '무너미.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'성북구','seq_storeboard.currval,0,0, '무너미','서울 성북구 종암로38길 16',
+'029035058', '카페', '치즈케이크가 전문인 카페입니다.예쁘고 다양한 치즈케이크가 선물용으로도 좋습니다.', '무너미.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'성북구','seq_storeboard.currval,0,0, '백란','서울 성북구 종암로38길 16',
+'029937745', '카페', '깊고 진한 맛의 커피와 곁들일 수 있는 다양한 베이커리 메뉴도 준비되어있습니다.', '백란.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'성북구','seq_storeboard.currval,0,0, '백란','서울 성북구 종암로38길 16',
+'029937745', '카페', '깊고 진한 맛의 커피와 곁들일 수 있는 다양한 베이커리 메뉴도 준비되어있습니다.', '백란.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'성북구',,seq_storeboard.currval,0,0, '용인가든','서울 성북구 종암로38길 16',
+'029930048', '음식점', '북한산 우이천가에 자리 잡은 한식당입니다. ', '용인가든.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'성북구','seq_storeboard.currval,0,0, '옥류헌릴렉스','서울 성북구 종암로38길 16',
+'029931829', '음식점', '4대째 전통 한정식과 자연 먹거리만을 고집하는 옥류헌입니다. ', '옥류헌릴렉스.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'성북구',',seq_storeboard.currval,0,0, '아띠랑스','서울 성북구 종암로38길 16',
+'050713032621', '카페', '부드러운 아메리카노와 고운 거품이 올라간 라떼를 맛 볼 수 있는 매장입니다. ', '아띠랑스.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'성북구',',seq_storeboard.currval,0,0, '저스트라운지','서울 성북구 종암로38길 16',
+'050714415677','카페', '낮에는 카페,저녁에는 디제잉바로 운영되는 라운지 펍 라운지 운영시간에도 카페이용이 가능합니다 ', '저스트라운지.jpg', sysdate);
+
+--서대문구
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'서대문구',',seq_storeboard.currval,0,0, '제일분식','서울 서대문구 연희로 32',
+'029857333', '음식점', '미아삼거리 숭인시장 내에 자리한 분식점입니다. ', '제일분식.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'서대문구',',seq_storeboard.currval,0,0, '미림산장','서울 서대문구 연희로 32',
+'029933330', '음식점', '한정식, 왕갈비, 오리로스, 백숙, 보신탕, 매기매운탕.', '미림산장.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'서대문구',',seq_storeboard.currval,0,0, '카페 산아래','서울 서대문구 연희로 32',
+'050713528813', '음식점', '한정식, 왕갈비, 오리로스, 백숙, 보신탕, 매기매운탕.', '카페산아래.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'서대문구',',seq_storeboard.currval,0,0, '어셈블','서울 서대문구 연희로 32',
+'050714092813', '카페', '이쁜 인테리어와 맛있는 유자민트티', '어셈블.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'서대문구',',seq_storeboard.currval,0,0, '무너미','서울 서대문구 연희로 32',
+'029035058', '카페', '치즈케이크가 전문인 카페입니다.예쁘고 다양한 치즈케이크가 선물용으로도 좋습니다.', '무너미.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'서대문구',',seq_storeboard.currval,0,0, '무너미','서울 서대문구 연희로 32',
+'029035058', '카페', '치즈케이크가 전문인 카페입니다.예쁘고 다양한 치즈케이크가 선물용으로도 좋습니다.', '무너미.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'서대문구',',seq_storeboard.currval,0,0, '백란','서울 서대문구 연희로 32',
+'029937745', '카페', '깊고 진한 맛의 커피와 곁들일 수 있는 다양한 베이커리 메뉴도 준비되어있습니다.', '백란.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'서대문구',',seq_storeboard.currval,0,0, '백란','서울 서대문구 연희로 32',
+'029937745', '카페', '깊고 진한 맛의 커피와 곁들일 수 있는 다양한 베이커리 메뉴도 준비되어있습니다.', '백란.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'서대문구',',seq_storeboard.currval,0,0, '용인가든','서울 서대문구 연희로 32',
+'029930048', '음식점', '북한산 우이천가에 자리 잡은 한식당입니다. ', '용인가든.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'서대문구',',seq_storeboard.currval,0,0, '옥류헌릴렉스','서울 서대문구 연희로 32',
+'029931829', '음식점', '4대째 전통 한정식과 자연 먹거리만을 고집하는 옥류헌입니다. ', '옥류헌릴렉스.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'서대문구',',seq_storeboard.currval,0,0, '아띠랑스','서울 서대문구 연희로 32',
+'050713032621', '카페', '부드러운 아메리카노와 고운 거품이 올라간 라떼를 맛 볼 수 있는 매장입니다. ', '아띠랑스.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'서대문구',',seq_storeboard.currval,0,0, '저스트라운지','서울 서대문구 연희로 32',
+'050714415677','카페', '낮에는 카페,저녁에는 디제잉바로 운영되는 라운지 펍 라운지 운영시간에도 카페이용이 가능합니다 ', '저스트라운지.jpg', sysdate);
+
+--송파구
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'송파구',',seq_storeboard.currval,0,0, '멘야하나비','서울 송파구 백제고분로45길 38',
+'050714415677','음식점', ' 안녕하세요! 마제소바의 원조 멘야하나비 입니다! 저희는 여러 방송매체를 통해 마제소바 맛집으로 알려지고 있습니다! ', '멘야하나비.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'송파구',',seq_storeboard.currval,0,0, '저스트라운지','서울 송파구 백제고분로45길 38',
+'050714415677','음식점', ' 낮에는 카페,저녁에는 디제잉바로 운영되는 라운지 펍 라운지 운영시간에도 카페이용이 가능합니다  ', '저스트라운지.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'송파구',',seq_storeboard.currval,0,0, '아띠랑스','서울 송파구 백제고분로45길 38',
+'050714415677','음식점', ' 부드러운 아메리카노와 고운 거품이 올라간 라떼를 맛 볼 수 있는 매장입니다.  ', '아띠랑스.jpg', sysdate);
+
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'송파구',',seq_storeboard.currval,0,0, '옥류헌릴렉스','서울 송파구 백제고분로45길 38',
+'050714415677','음식점', ' 4대째 전통 한정식과 자연 먹거리만을 고집하는 옥류헌입니다.  ', '옥류헌릴렉스.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'송파구',',seq_storeboard.currval,0,0, '어셈블','서울 송파구 백제고분로45길 38',
+'050714415677','음식점', ' 이쁜 인테리어와 맛있는 유자민트티 ', '어셈블.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'송파구',',seq_storeboard.currval,0,0, '카페 산아래','서울 송파구 백제고분로45길 38',
+'050714415677','음식점', ' 한정식, 왕갈비, 오리로스, 백숙, 보신탕, 매기매운탕. ', '카페산아래.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'송파구',',seq_storeboard.currval,0,0, '미노커피','서울 송파구 백제고분로45길 38',
+'050714415677','음식점', ' 미노커피는 로스터리핸드드립 전문 카페입니다. ', '미노커피.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'송파구',',seq_storeboard.currval,0,0, '체코베뻬','서울 송파구 백제고분로45길 38',
+'050714415677','음식점', ' 매장에서 직접 만드는 이태리정통 젤라또입니다. ', '체코베뻬.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'송파구',',seq_storeboard.currval,0,0, '미림산장','서울 송파구 백제고분로45길 38',
+'050714415677','음식점', ' 한정식, 왕갈비, 오리로스, 백숙, 보신탕, 매기매운탕. ', '미림산장.jpg', sysdate);
+
+--양천구
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'양천구',',seq_storeboard.currval,0,0, '멘야하나비','서울 양천구 신정중앙로 95 1층',
+'050714415677','음식점', ' 안녕하세요! 마제소바의 원조 멘야하나비 입니다! 저희는 여러 방송매체를 통해 마제소바 맛집으로 알려지고 있습니다! ', '멘야하나비.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'양천구',',seq_storeboard.currval,0,0, '저스트라운지','서울 양천구 신정중앙로 95 1층',
+'050714415677','음식점', ' 낮에는 카페,저녁에는 디제잉바로 운영되는 라운지 펍 라운지 운영시간에도 카페이용이 가능합니다  ', '저스트라운지.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'양천구',',seq_storeboard.currval,0,0, '아띠랑스','서울 양천구 신정중앙로 95 1층',
+'050714415677','음식점', ' 부드러운 아메리카노와 고운 거품이 올라간 라떼를 맛 볼 수 있는 매장입니다.  ', '아띠랑스.jpg', sysdate);
+
+
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'양천구',',seq_storeboard.currval,0,0, '옥류헌릴렉스','서울 양천구 신정중앙로 95 1층',
+'050714415677','음식점', ' 4대째 전통 한정식과 자연 먹거리만을 고집하는 옥류헌입니다.  ', '옥류헌릴렉스.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'양천구',',seq_storeboard.currval,0,0, '어셈블','서울 양천구 신정중앙로 95 1층',
+'050714415677','음식점', ' 이쁜 인테리어와 맛있는 유자민트티 ', '어셈블.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'양천구',',seq_storeboard.currval,0,0, '카페 산아래','서울 양천구 신정중앙로 95 1층',
+'050714415677','음식점', ' 한정식, 왕갈비, 오리로스, 백숙, 보신탕, 매기매운탕. ', '카페산아래.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'양천구',',seq_storeboard.currval,0,0, '미노커피','서울 양천구 신정중앙로 95 1층',
+'050714415677','음식점', ' 미노커피는 로스터리핸드드립 전문 카페입니다. ', '미노커피.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'양천구',',seq_storeboard.currval,0,0, '체코베뻬','서울 양천구 신정중앙로 95 1층',
+'050714415677','음식점', ' 매장에서 직접 만드는 이태리정통 젤라또입니다. ', '체코베뻬.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'양천구',',seq_storeboard.currval,0,0, '미림산장','서울 양천구 신정중앙로 95 1층',
+'050714415677','음식점', ' 한정식, 왕갈비, 오리로스, 백숙, 보신탕, 매기매운탕. ', '미림산장.jpg', sysdate);
+
+--영등포구
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'영등포구',',seq_storeboard.currval,0,0, '멘야하나비','서울 영등포구 도림로139가길 11-1 1층 골목집',
+'050714415677','음식점', ' 안녕하세요! 마제소바의 원조 멘야하나비 입니다! 저희는 여러 방송매체를 통해 마제소바 맛집으로 알려지고 있습니다! ', '멘야하나비.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'영등포구',',seq_storeboard.currval,0,0, '저스트라운지','서울 영등포구 도림로139가길 11-1 1층 골목집',
+'050714415677','음식점', ' 낮에는 카페,저녁에는 디제잉바로 운영되는 라운지 펍 라운지 운영시간에도 카페이용이 가능합니다  ', '저스트라운지.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'영등포구',',seq_storeboard.currval,0,0, '아띠랑스','서울 영등포구 도림로139가길 11-1 1층 골목집',
+'050714415677','음식점', ' 부드러운 아메리카노와 고운 거품이 올라간 라떼를 맛 볼 수 있는 매장입니다.  ', '아띠랑스.jpg', sysdate);
+
+
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'영등포구',',seq_storeboard.currval,0,0, '옥류헌릴렉스','서울 영등포구 도림로139가길 11-1 1층 골목집',
+'050714415677','음식점', ' 4대째 전통 한정식과 자연 먹거리만을 고집하는 옥류헌입니다.  ', '옥류헌릴렉스.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'영등포구',',seq_storeboard.currval,0,0, '어셈블','서울 영등포구 도림로139가길 11-1 1층 골목집',
+'050714415677','음식점', ' 이쁜 인테리어와 맛있는 유자민트티 ', '어셈블.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'영등포구',',seq_storeboard.currval,0,0, '카페 산아래','서울 영등포구 도림로139가길 11-1 1층 골목집',
+'050714415677','음식점', ' 한정식, 왕갈비, 오리로스, 백숙, 보신탕, 매기매운탕. ', '카페산아래.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'영등포구',',seq_storeboard.currval,0,0, '미노커피','서울 영등포구 도림로139가길 11-1 1층 골목집',
+'050714415677','음식점', ' 미노커피는 로스터리핸드드립 전문 카페입니다. ', '미노커피.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'영등포구',',seq_storeboard.currval,0,0, '체코베뻬','서울 영등포구 도림로139가길 11-1 1층 골목집',
+'050714415677','음식점', ' 매장에서 직접 만드는 이태리정통 젤라또입니다. ', '체코베뻬.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'영등포구',',seq_storeboard.currval,0,0, '미림산장','서울 영등포구 도림로139가길 11-1 1층 골목집',
+'050714415677','음식점', ' 한정식, 왕갈비, 오리로스, 백숙, 보신탕, 매기매운탕. ', '미림산장.jpg', sysdate);
+
+--용산구
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'용산구',',seq_storeboard.currval,0,0, '멘야하나비','서울 용산구 백범로99길 50',
+'050714415677','음식점', ' 안녕하세요! 마제소바의 원조 멘야하나비 입니다! 저희는 여러 방송매체를 통해 마제소바 맛집으로 알려지고 있습니다! ', '멘야하나비.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'용산구',',seq_storeboard.currval,0,0, '저스트라운지','서울 용산구 백범로99길 50',
+'050714415677','음식점', ' 낮에는 카페,저녁에는 디제잉바로 운영되는 라운지 펍 라운지 운영시간에도 카페이용이 가능합니다  ', '저스트라운지.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'용산구',',seq_storeboard.currval,0,0, '아띠랑스','서울 용산구 백범로99길 50',
+'050714415677','음식점', ' 부드러운 아메리카노와 고운 거품이 올라간 라떼를 맛 볼 수 있는 매장입니다.  ', '아띠랑스.jpg', sysdate);
+
+
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'용산구',',seq_storeboard.currval,0,0, '옥류헌릴렉스','서울 용산구 백범로99길 50',
+'050714415677','음식점', ' 4대째 전통 한정식과 자연 먹거리만을 고집하는 옥류헌입니다.  ', '옥류헌릴렉스.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'용산구',',seq_storeboard.currval,0,0, '어셈블','서울 용산구 백범로99길 50',
+'050714415677','음식점', ' 이쁜 인테리어와 맛있는 유자민트티 ', '어셈블.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'용산구',',seq_storeboard.currval,0,0, '카페 산아래','서울 용산구 백범로99길 50',
+'050714415677','음식점', ' 한정식, 왕갈비, 오리로스, 백숙, 보신탕, 매기매운탕. ', '카페산아래.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'용산구',',seq_storeboard.currval,0,0, '미노커피','서울 용산구 백범로99길 50',
+'050714415677','음식점', ' 미노커피는 로스터리핸드드립 전문 카페입니다. ', '미노커피.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'용산구',',seq_storeboard.currval,0,0, '체코베뻬','서울 용산구 백범로99길 50',
+'050714415677','음식점', ' 매장에서 직접 만드는 이태리정통 젤라또입니다. ', '체코베뻬.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'용산구',',seq_storeboard.currval,0,0, '미림산장','서울 용산구 백범로99길 50',
+'050714415677','음식점', ' 한정식, 왕갈비, 오리로스, 백숙, 보신탕, 매기매운탕. ', '미림산장.jpg', sysdate);
+
+--은평구
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'은평구',',seq_storeboard.currval,0,0, '멘야하나비','서울 은평구 통일로 1020 L2층',
+'050714415677','음식점', ' 안녕하세요! 마제소바의 원조 멘야하나비 입니다! 저희는 여러 방송매체를 통해 마제소바 맛집으로 알려지고 있습니다! ', '멘야하나비.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'은평구',',seq_storeboard.currval,0,0, '저스트라운지','서울 은평구 통일로 1020 L2층',
+'050714415677','음식점', ' 낮에는 카페,저녁에는 디제잉바로 운영되는 라운지 펍 라운지 운영시간에도 카페이용이 가능합니다  ', '저스트라운지.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'은평구',',seq_storeboard.currval,0,0, '아띠랑스','서울 은평구 통일로 1020 L2층',
+'050714415677','음식점', ' 부드러운 아메리카노와 고운 거품이 올라간 라떼를 맛 볼 수 있는 매장입니다.  ', '아띠랑스.jpg', sysdate);
+
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'은평구',',seq_storeboard.currval,0,0, '옥류헌릴렉스','서울 은평구 통일로 1020 L2층',
+'050714415677','음식점', ' 4대째 전통 한정식과 자연 먹거리만을 고집하는 옥류헌입니다.  ', '옥류헌릴렉스.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'은평구','',seq_storeboard.currval,0,0, '어셈블','서울 은평구 통일로 1020 L2층',
+'050714415677','음식점', ' 이쁜 인테리어와 맛있는 유자민트티 ', '어셈블.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'은평구',',seq_storeboard.currval,0,0, '카페 산아래','서울 은평구 통일로 1020 L2층',
+'050714415677','음식점', ' 한정식, 왕갈비, 오리로스, 백숙, 보신탕, 매기매운탕. ', '카페산아래.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'은평구',',seq_storeboard.currval,0,0, '미노커피','서울 은평구 통일로 1020 L2층',
+'050714415677','음식점', ' 미노커피는 로스터리핸드드립 전문 카페입니다. ', '미노커피.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'은평구',',seq_storeboard.currval,0,0, '체코베뻬','서울 은평구 통일로 1020 L2층',
+'050714415677','음식점', ' 매장에서 직접 만드는 이태리정통 젤라또입니다. ', '체코베뻬.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'은평구',',seq_storeboard.currval,0,0, '미림산장','서울 은평구 통일로 1020 L2층',
+'050714415677','음식점', ' 한정식, 왕갈비, 오리로스, 백숙, 보신탕, 매기매운탕. ', '미림산장.jpg', sysdate);
+
+--종로구
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'종로구',',seq_storeboard.currval,0,0, '멘야하나비','서울 은평구 통일로 1020 L2층',
+'050714415677','음식점', ' 안녕하세요! 마제소바의 원조 멘야하나비 입니다! 저희는 여러 방송매체를 통해 마제소바 맛집으로 알려지고 있습니다! ', '멘야하나비.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'종로구',',seq_storeboard.currval,0,0, '저스트라운지','서울 은평구 통일로 1020 L2층',
+'050714415677','음식점', ' 낮에는 카페,저녁에는 디제잉바로 운영되는 라운지 펍 라운지 운영시간에도 카페이용이 가능합니다  ', '저스트라운지.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'종로구',',seq_storeboard.currval,0,0, '아띠랑스','서울 은평구 통일로 1020 L2층',
+'050714415677','음식점', ' 부드러운 아메리카노와 고운 거품이 올라간 라떼를 맛 볼 수 있는 매장입니다.  ', '아띠랑스.jpg', sysdate);
+
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'종로구',',seq_storeboard.currval,0,0, '옥류헌릴렉스','서울 종로구 새문안로5길 5-3',
+'050714415677','음식점', ' 4대째 전통 한정식과 자연 먹거리만을 고집하는 옥류헌입니다.  ', '옥류헌릴렉스.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'종로구',',seq_storeboard.currval,0,0, '어셈블','서울 종로구 새문안로5길 5-3',
+'050714415677','음식점', ' 이쁜 인테리어와 맛있는 유자민트티 ', '어셈블.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'종로구',',seq_storeboard.currval,0,0, '카페 산아래','서울 종로구 새문안로5길 5-3',
+'050714415677','음식점', ' 한정식, 왕갈비, 오리로스, 백숙, 보신탕, 매기매운탕. ', '카페산아래.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'종로구',',seq_storeboard.currval,0,0, '미노커피','서울 종로구 새문안로5길 5-3',
+'050714415677','음식점', ' 미노커피는 로스터리핸드드립 전문 카페입니다. ', '미노커피.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'종로구',',seq_storeboard.currval,0,0, '체코베뻬','서울 종로구 새문안로5길 5-3',
+'050714415677','음식점', ' 매장에서 직접 만드는 이태리정통 젤라또입니다. ', '체코베뻬.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'종로구',',seq_storeboard.currval,0,0, '미림산장','서울 종로구 새문안로5길 5-3',
+'050714415677','음식점', ' 한정식, 왕갈비, 오리로스, 백숙, 보신탕, 매기매운탕. ', '미림산장.jpg', sysdate);
+
+--중구
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'중구',',seq_storeboard.currval,0,0, '멘야하나비','서울 중구 수표로 42-3 2층',
+'050714415677','음식점', ' 안녕하세요! 마제소바의 원조 멘야하나비 입니다! 저희는 여러 방송매체를 통해 마제소바 맛집으로 알려지고 있습니다! ', '멘야하나비.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'중구',',seq_storeboard.currval,0,0, '저스트라운지','서울 중구 수표로 42-3 2층',
+'050714415677','음식점', ' 낮에는 카페,저녁에는 디제잉바로 운영되는 라운지 펍 라운지 운영시간에도 카페이용이 가능합니다  ', '저스트라운지.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'중구',',seq_storeboard.currval,0,0, '아띠랑스','서울 중구 수표로 42-3 2층',
+'050714415677','음식점', ' 부드러운 아메리카노와 고운 거품이 올라간 라떼를 맛 볼 수 있는 매장입니다.  ', '아띠랑스.jpg', sysdate);
+
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'중구',',seq_storeboard.currval,0,0, '옥류헌릴렉스','서울 중구 수표로 42-3 2층',
+'050714415677','음식점', ' 4대째 전통 한정식과 자연 먹거리만을 고집하는 옥류헌입니다.  ', '옥류헌릴렉스.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'중구',',seq_storeboard.currval,0,0, '어셈블','서울 중구 수표로 42-3 2층',
+'050714415677','음식점', ' 이쁜 인테리어와 맛있는 유자민트티 ', '어셈블.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'중구',',seq_storeboard.currval,0,0, '카페 산아래','서울 중구 수표로 42-3 2층',
+'050714415677','음식점', ' 한정식, 왕갈비, 오리로스, 백숙, 보신탕, 매기매운탕. ', '카페산아래.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'중구',',seq_storeboard.currval,0,0, '미노커피','서울 중구 수표로 42-3 2층',
+'050714415677','음식점', ' 미노커피는 로스터리핸드드립 전문 카페입니다. ', '미노커피.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'중구',',seq_storeboard.currval,0,0, '체코베뻬','서울 중구 수표로 42-3 2층',
+'050714415677','음식점', ' 매장에서 직접 만드는 이태리정통 젤라또입니다. ', '체코베뻬.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'중구',',seq_storeboard.currval,0,0, '미림산장','서울 중구 수표로 42-3 2층',
+'050714415677','음식점', ' 한정식, 왕갈비, 오리로스, 백숙, 보신탕, 매기매운탕. ', '미림산장.jpg', sysdate);
+
+--중랑구
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'중랑구',',seq_storeboard.currval,0,0, '멘야하나비','서울 중랑구 면목로 330-1',
+'050714415677','음식점', ' 안녕하세요! 마제소바의 원조 멘야하나비 입니다! 저희는 여러 방송매체를 통해 마제소바 맛집으로 알려지고 있습니다! ', '멘야하나비.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'중랑구',',seq_storeboard.currval,0,0, '저스트라운지','서울 중랑구 면목로 330-1',
+'050714415677','음식점', ' 낮에는 카페,저녁에는 디제잉바로 운영되는 라운지 펍 라운지 운영시간에도 카페이용이 가능합니다  ', '저스트라운지.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'중랑구',',seq_storeboard.currval,0,0, '아띠랑스','서울 중랑구 면목로 330-1',
+'050714415677','음식점', ' 부드러운 아메리카노와 고운 거품이 올라간 라떼를 맛 볼 수 있는 매장입니다.  ', '아띠랑스.jpg', sysdate);
+
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'중랑구',',seq_storeboard.currval,0,0, '옥류헌릴렉스','서울 중랑구 면목로 330-1',
+'050714415677','음식점', ' 4대째 전통 한정식과 자연 먹거리만을 고집하는 옥류헌입니다.  ', '옥류헌릴렉스.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'중랑구',',seq_storeboard.currval,0,0, '어셈블','서울 중랑구 면목로 330-1',
+'050714415677','음식점', ' 이쁜 인테리어와 맛있는 유자민트티 ', '어셈블.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'중랑구',',seq_storeboard.currval,0,0, '카페 산아래','서울 중랑구 면목로 330-1',
+'050714415677','음식점', ' 한정식, 왕갈비, 오리로스, 백숙, 보신탕, 매기매운탕. ', '카페산아래.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'중랑구',',seq_storeboard.currval,0,0, '미노커피','서울 중랑구 면목로 330-1',
+'050714415677','음식점', ' 미노커피는 로스터리핸드드립 전문 카페입니다. ', '미노커피.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'중랑구',',seq_storeboard.currval,0,0, '체코베뻬','서울 중랑구 면목로 330-1',
+'050714415677','음식점', ' 매장에서 직접 만드는 이태리정통 젤라또입니다. ', '체코베뻬.jpg', sysdate);
+
+insert into storeboard values (seq_storeboard.nextval,'hong','홍길동','서울특별시',
+'중랑구',',seq_storeboard.currval,0,0, '미림산장','서울 중랑구 면목로 330-1',
+'050714415677','음식점', ' 한정식, 왕갈비, 오리로스, 백숙, 보신탕, 매기매운탕. ', '미림산장.jpg', sysdate);
+
+-- 8) 데이터 검색 (select)
+select * from storeboard;
+select * from storeboard where seq=1;
+
+-- 9) 데이터 삭제
+delete storeboard where seq=23;
+
+-- 10) DB 저장
+commit;
+
+-- 11) 인덱스뷰
+-- => 행번호(RowNum, 인덱스) 기준으로 데이터를 얻어오는 것
+select * from
+(select rownum rn, tt.* from
+(select * from storeboard order by seq desc) tt)
+where rn>=1 and rn<=5;
+
+-- 12) 총데이터갯수 확인
+select count(*) as cnt from storeboard;
+
+update storeboard set id='gong', name='고길동',city='서울특별시',gu='강남구',content='아니요',storeName='투썸플레이스', storePlace='서울시 서초구 510', 
+storeNum= 025444248,storeCategory ='카페',storeContent='맛있습니다 케이크', image1= 'twosome.jpg' where seq='1';
+
+select seq,city,gu,storeName, storePlace, storeNum, storeCategory,storeContent,image1,
+to_char(logtime, 'YYYY.MM.DD') as logtime from (select rownum rn, tt.* from 
+(select * from storeboard order by seq desc) tt) where rn>=1 and rn<=5;
+
+select * from storeboard where city='서울특별시' and gu='강남구';
+
+commit;
+---------------

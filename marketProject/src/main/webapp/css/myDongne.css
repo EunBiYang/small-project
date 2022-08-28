@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: 'LotteMartHappy';
+	font-style: normal;
+	font-weight: 100;
+	src:
+		url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartHappy/LotteMartHappyMedium.woff')
+		format('woff');
+}
+section#content {
+    margin-top: 72px;
+}
+
+.head-title {
+    font-size: 40px;
+    font-weight: 600;
+    letter-spacing: -0.6px;
+    text-align: center;
+    color: #212529;
+    margin-bottom: 40px;
+    font-family: LotteMartHappy;
+}
+#line {
+	width: 200px;
+	padding: 2px;
+	font-weight: bold;
+	vertical-align: top;
+	color: #fff;
+	background: black;
+	margin: 20px 10px;
+}
+.text{
+font-weight:bolder;
+text-align: center; 
+font-size: 25px; 
+font-family:'LotteMartHappy';
+}

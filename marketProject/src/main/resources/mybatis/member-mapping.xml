@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.memberMapper">
+
+	<select id="login" resultType="String" parameterType="java.util.Map">
+		select * from member where id=#{id} and pwd=#{pwd}
+	</select>
+	
+	<insert id="write" parameterType="MemberDTO">
+		insert into member values 
+		(#{name},#{id},#{nickname},#{pwd},#{gender},#{email1},#{email2},#{tel1},#{tel2},#{tel3},#{addr},sysdate)
+	</insert>
+	
+	<!-- resultType="boolean" : 불린값으로는 리턴받을 수 없음 -->
+	<select id="isExistId" parameterType="String" resultType="String" >
+		select * from member where id=#{id}
+	</select>
+	
+	<update id="modify" parameterType="MemberDTO">
+		update member set name=#{name}, nickname=#{nickname}, pwd=#{pwd}, gender=#{gender}, email1=#{email1}, email2=#{email2},
+		tel1=#{tel1}, tel2=#{tel2}, tel3=#{tel3}, addr=#{addr} where id=#{id}
+	</update>
+	
+	<select id="getMember" parameterType="String" resultType="MemberDTO">
+		select * from member where id=#{id}
+	</select>
+	
+	<delete id="delete" parameterType="String">
+		delete member where id=#{id}
+	</delete>
+	
+	<select id="selectList" parameterType="java.util.Map" resultType="MemberDTO">
+		<![CDATA[ select * from 
+			(select rownum rn, tt.* from
+			(select * from member order by name asc) tt)
+			where rn >= #{startNum} and rn <= #{endNum} ]]>
+	</select>
+	
+	<select id="getTotalMember" resultType="int">
+		select count(*) as cnt from member
+	</select>
+	
+</mapper>

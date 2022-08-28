@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.marketMapper">
+	<insert id="marketWrite" parameterType="dto">
+		insert into market values
+		(seq_market.nextval,#{id},#{city},#{gu},#{title},#{price},#{content},
+			#{image,jdbcType=VARCHAR},#{image2, jdbcType=VARCHAR},#{image3,jdbcType=VARCHAR},0,seq_market.currval,0,0,sysdate)
+	</insert>
+	<select id="marketList" resultType="dto">
+		<![CDATA[select * from(select rownum rn, tt.* from
+		(select * from market where re_lev=0 order by hit desc) tt)
+		where rn>=1 and rn<=50]]>
+	</select>
+	
+	<select id="marketsiGu" resultType="dto">
+		select*from market where city=#{city} and gu=#{gu}
+	</select>
+		
+	<select id="marketView" parameterType="int" resultType="dto">
+		select * from market where seq=#{seq}
+	</select>
+	
+	<select id="getTotal" resultType="int">
+		select count(*) as cnt from market
+	</select>
+	<update id="getHit" parameterType="int">
+		update market set hit = hit+1 where seq=#{seq}
+	</update>
+	<update id="updateReply" parameterType="dto">
+		update market set re_seq= re_seq+1 where re_ref=#{re_ref} and re_seq > #{re_seq}
+	</update>
+	
+	<insert id="insertReply" parameterType="dto">
+		insert into market values(seq_market.nextval,#{id},' ',' ',' ',0,#{content},null,null,null,0,#{re_ref},${re_seq+1},${re_lev+1},sysdate)
+	</insert>
+	
+	<select id="replyView" parameterType="int" resultType="dto">	<!-- <![CDATA[ query문 ]]> 대괄호안의 모든 쿼리를 문자열로 취급-->
+	<![CDATA[	select *from
+		(select rownum rn, tt.* from
+		(select *from market  where re_lev > 0 order by re_ref desc,re_seq asc)tt)
+		where rn>=1 and rn<=500 and re_ref=#{re_ref}]]>
+	</select>
+	
+	<update id="updateHit" parameterType="int">
+		update market set hit=hit+1 where seq=#{seq}
+	</update>
+	
+	<select id="popular_products" resultType="dto">
+	<![CDATA[	select * from
+		(select rownum rn, tt.* from
+		(select * from market where re_lev=0 order by hit desc) tt)
+		where rn>=1 and rn<=6 ]]>
+	</select>
+	
+	<delete id="marketDelete" parameterType="int">
+		delete from market where seq=#{seq}
+	</delete>
+	
+	<update id="marketModify" parameterType="dto">
+		update market set title=#{title},price=#{price},city=#{city},gu=#{gu},
+		content=#{content},image=#{image, jdbcType=VARCHAR},image2=#{image2, jdbcType=VARCHAR},image3=#{image3, jdbcType=VARCHAR} where seq=#{seq}
+	</update>
+	
+	<update id="replyModify">
+		update market set content=#{content},logtime=sysdate where seq=#{seq}
+	</update>
+	
+	<select id="myProduct" parameterType="String" resultType="dto">
+		select *from market where id=#{id} and re_lev=0
+	</select>
+</mapper>
