@@ -8,7 +8,7 @@
 <script type="text/javascript">
   if(${result >0}){
 	  alert("삭제 되었습니다.");
-	location.href = "dongne_main.do";
+	location.href = "/market/storeboard/myDongne.do";
   } else {
 	alert("삭제하지 못했습니다.");
 	history.back();

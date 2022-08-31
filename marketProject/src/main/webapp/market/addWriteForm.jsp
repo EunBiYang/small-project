@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,7 +52,12 @@
 			</tr>
 			<tr>
 				<td colspan="2" align="center" >
-					<button type="button" class="button-42" onclick="checkWrite();">물건등록</button>
+				<c:if test="${memId==null}">
+				<button type="button" class="button-42"onclick="location.href='../member/loginForm.do'">물건등록</button>
+				</c:if>
+				<c:if test="${memId!=null}">
+				<button type="button" class="button-42" onclick="checkWrite();">물건등록</button>
+				</c:if>
 					<button type="reset" class="button-42">다시작성</button>
 				</td>
 			</tr>

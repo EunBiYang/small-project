@@ -5,33 +5,7 @@
 <meta charset="UTF-8">
 <title>내 물건 올리기</title>
 <script type="text/javascript" src="../js/jquery-3.6.0.min.js"></script>
-<script type="text/javascript">
-function checkWrite() {
-	   var frm = document.add;
-	   var file = document.getElementById("image").value;
-	   
-	if (!frm.title.value) {
-			alert("제목을 입력해 주세요.");
-			frm.name.focus();
-		} else if (!frm.price.value) {
-			alert("가격을 입력해 주세요.");
-			frm.id.focus();
-		} else if (!frm.city.value) {
-			alert("지역을 선택해 주세요.");
-			frm.city.focus();
-		} else if (!frm.gu.value) {
-			alert("동네를 선택해 주세요.");
-			frm.gu.focus();
-		} else if (!frm.content.value) {
-			alert("내용을 입력해 주세요.");
-		} else if (!file) {
-			alert("파일을 선택해 주세요.");
-		}  else {
-			frm.submit();
-		}
-	}
-
-</script>
+<script type="text/javascript" src="../script/addWriteForm.js"></script>	
 <style type="text/css">
 @font-face {
 	font-family: 'PyeongChangPeace-Bold';
@@ -174,66 +148,21 @@ input, textarea, .hot-articles-nav-select {
 				<td class="even"><input type="text" name="title" value="${dto.title}" ></td>
 			</tr>
 			<tr>
-				<th scope="row" class="even">가격</th>
-				<td class="even"><input type="text" name="price"  size="40" value="${dto.price}"></td>
+				<th scope="row" >가격</th>
+				<td><input type="text" name="price"  size="40" value="${dto.price}"></td>
 			</tr>
 			
 			<tr>
             <th scope="row" class="even">지역선택</th>
-            <td class="even"><select name="city" id="region1" class="hot-articles-nav-select">
-                  <option value="">지역을 선택하세요</option>
-                  <option value="서울특별시">서울특별시</option>
-                  <option value="부산광역시">부산광역시</option>
-                  <option value="대구광역시">대구광역시</option>
-                  <option value="인천광역시">인천광역시</option>
-                  <option value="광주광역시">광주광역시</option>
-                  <option value="대전광역시">대전광역시</option>
-                  <option value="울산광역시">울산광역시</option>
-                  <option value="세종특별자치시">세종특별자치시</option>
-                  <option value="경기도">경기도</option>
-                  <option value="강원도">강원도</option>
-                  <option value="충청북도">충청북도</option>
-                  <option value="충청남도">충청남도</option>
-                  <option value="전라북도">전라북도</option>
-                  <option value="전라남도">전라남도</option>
-                  <option value="경상북도">경상북도</option>
-                  <option value="경상남도">경상남도</option>
-                  <option value="제주특별자치도">제주특별자치도</option>
-               </select> 
-               <select name="gu" id="region2" class="hot-articles-nav-select">
-                  <option value="">동내를 선택하세요</option>
-                  <option value="강남구">강남구</option>
-                  <option value="강동구">강동구</option>
-                  <option value="강북구">강북구</option>
-                  <option value="강서구">강서구</option>
-                  <option value="관악구">관악구</option>
-                  <option value="광진구">광진구</option>
-                  <option value="구로구">구로구</option>
-                  <option value="금천구">금천구</option>
-                  <option value="노원구">노원구</option>
-                  <option value="도봉구">도봉구</option>
-                  <option value="동대문구">동대문구</option>
-                  <option value="동작구">동작구</option>
-                  <option value="마포구">마포구</option>
-                  <option value="서대문구">서대문구</option>
-                  <option value="서초구">서초구</option>
-                  <option value="성동구">성동구</option>
-                  <option value="성북구">성북구</option>
-                  <option value="송파구">송파구</option>
-                  <option value="양천구">양천구</option>
-                  <option value="영등포구">영등포구</option>
-                  <option value="용산구">용산구</option>
-                  <option value="은평구">은평구</option>
-                  <option value="종로구">종로구</option>
-                  <option value="중구">중구</option>
-                  <option value="중랑구">중랑구</option>
-               </select> 
+            <td class="even">
+            	<span id="category1"></span> 
+				<span id="category2"></span> 
             </td>
          </tr>
 		
 			<tr>
-				<th scope="row" class="even">내용</th>
-				<td class="even"><textarea name="content" rows="15" cols="40">${dto.content}</textarea>
+				<th scope="row" >내용</th>
+				<td ><textarea name="content" rows="15" cols="40">${dto.content}</textarea>
 				</td>
 			</tr>
 			<tr>

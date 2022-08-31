@@ -50,7 +50,7 @@
 				<!-- 버튼 -->
 				<input class="button-42" type="button" value="내 물건 올리기"
 					onclick="location.href='../market/addWriteForm.do'">
-				<input class="button-42" type="button" value="돌아가기" onclick="location.href='../market/marketMain.do'">
+				<input class="button-42" type="button" value="돌아가기" onclick="history.back()">
 				<!-- 카테고리 부분 -->
 				<span id="category1"></span> <span id="category2"></span>
 			</div>

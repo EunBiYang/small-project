@@ -8,11 +8,11 @@
 <script type="text/javascript">
 	if(${result > 0}){
 		alert("삭제되었습니다");
-		
+		location.href="/market/board/myProduct.do";
 	 }
 	else alert("삭제 실패");
 	
-	location.href="marketView.do?seq=${seq}";
+	
 </script>
 </head>
 <body>

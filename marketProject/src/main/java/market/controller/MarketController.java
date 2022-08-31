@@ -52,7 +52,7 @@ public class MarketController {
 		
 		String city = request.getParameter("city");
 		String gu = request.getParameter("gu");
-
+		
 		//리스트(시,구 검색 결과)
 		List<MarketDTO> siguList = marketService.marketsiGu(city, gu);
 		
@@ -196,7 +196,6 @@ public class MarketController {
 		File file2 = new File(filePath, fileName2);
 		File file3 = new File(filePath, fileName3);
 
-
 		try {
 			FileCopyUtils.copy(image.getInputStream(), new FileOutputStream(file));
 			FileCopyUtils.copy(image2.getInputStream(), new FileOutputStream(file2));
@@ -213,8 +212,8 @@ public class MarketController {
 		dto.setTitle(request.getParameter("title"));
 		dto.setPrice(Integer.parseInt(request.getParameter("price")));
 
-		dto.setCity(request.getParameter("city"));
-		dto.setGu(request.getParameter("gu"));
+		dto.setCity(request.getParameter("category1"));
+		dto.setGu(request.getParameter("category2"));
 		dto.setContent(request.getParameter("content"));
 		dto.setImage(fileName);
 		dto.setImage2(fileName2);
