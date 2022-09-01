@@ -1,0 +1,170 @@
+-- 1) 테이블 생성
+ create table market(
+    seq number not null,                -- 글번호
+    id varchar2(30) not null,           -- 작성자id
+    city varchar2(30) not null,         -- 시
+    gu varchar2(30) not null,           -- 구
+    title varchar2(40) not null,        -- 상품명
+    price number not null,             -- 단가
+    content varchar2(4000) not null,   -- 내용
+    image varchar2(50),               -- 제품사진
+    image2 varchar2(50),               -- 제품사진2
+    image3 varchar2(50),               -- 제품사진3
+    hit number default 0,               -- 조회수
+    re_ref number not null,                --원글 번호(seq)값과 동일
+    re_seq number not null,                --답글의 정렬을 위한 seq변수
+    re_lev number not null,
+    logtime date default sysdate        -- 작성일 
+);
+
+-- 2) 테이블 삭제
+drop table market purge;
+-- 3) 테이블 목록 확인
+select * from market;
+
+select *from
+		(select rownum rn, tt.* from
+		(select *from market where re_lev > 0 order by re_ref desc,re_seq asc)tt)
+		where rn>=1 and rn<=500 and re_ref=36;
+
+-- 4) 시퀀스 객체 생성
+create sequence seq_market nocache nocycle;
+-- 5) 시퀀스 객체 삭제
+drop sequence seq_market;
+-- 6) 정의된 시퀀스 조회
+select * from user_sequences;
+-- 7) 총데이터갯수 확인
+select count(*) as cnt from market;
+
+delete market where pContent='깨끗해요!';
+
+select*from market where city='서울' and gu='양천구';
+-- 8) DB 저장
+commit;
+
+-- 9) 데이터 저장 (insert)
+insert into market values	(seq_market.nextval	,'kim01'	,'서울'	,'강남구'	,'세탁기'	,	200000	,'중고 세탁기 팝니다.'	,'1.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim02'	,'서울'	,'강남구'	,'냉장고'	,	100000	,'중고 냉장고 팝니다.'	,'2.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim03'	,'서울'	,'강남구'	,'쇼파'	,	80000	,'중고 쇼파 팝니다.'	,'3.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim04'	,'서울'	,'강남구'	,'침대'	,	150000	,'중고 침대 팝니다.'	,'4.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim05'	,'서울'	,'강남구'	,'청소기'	,	50000	,'중고 청소기 팝니다.'	,'5.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim06'	,'서울'	,'강동구'	,'세탁기'	,	200000	,'중고 세탁기 팝니다.'	,'1.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim07'	,'서울'	,'강동구'	,'냉장고'	,	100000	,'중고 냉장고 팝니다.'	,'2.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim08'	,'서울'	,'강동구'	,'쇼파'	,	80000	,'중고 쇼파 팝니다.'	,'3.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim09'	,'서울'	,'강동구'	,'침대'	,	150000	,'중고 침대 팝니다.'	,'4.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim10'	,'서울'	,'강동구'	,'청소기'	,	50000	,'중고 청소기 팝니다.'	,'5.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim11'	,'서울'	,'강북구'	,'세탁기'	,	200000	,'중고 세탁기 팝니다.'	,'1.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim12'	,'서울'	,'강북구'	,'냉장고'	,	100000	,'중고 냉장고 팝니다.'	,'2.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim13'	,'서울'	,'강북구'	,'쇼파'	,	80000	,'중고 쇼파 팝니다.'	,'3.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim14'	,'서울'	,'강북구'	,'침대'	,	150000	,'중고 침대 팝니다.'	,'4.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim15'	,'서울'	,'강북구'	,'청소기'	,	50000	,'중고 청소기 팝니다.'	,'5.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim17'	,'서울'	,'강서구'	,'세탁기'	,	200000	,'중고 세탁기 팝니다.'	,'1.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim18'	,'서울'	,'강서구'	,'냉장고'	,	100000	,'중고 냉장고 팝니다.'	,'2.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim19'	,'서울'	,'강서구'	,'쇼파'	,	80000	,'중고 쇼파 팝니다.'	,'3.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim20'	,'서울'	,'강서구'	,'침대'	,	150000	,'중고 침대 팝니다.'	,'4.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim21'	,'서울'	,'강서구'	,'청소기'	,	50000	,'중고 청소기 팝니다.'	,'5.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim22'	,'서울'	,'관악구'	,'세탁기'	,	200000	,'중고 세탁기 팝니다.'	,'1.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim23'	,'서울'	,'관악구'	,'냉장고'	,	100000	,'중고 냉장고 팝니다.'	,'2.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim24'	,'서울'	,'관악구'	,'쇼파'	,	80000	,'중고 쇼파 팝니다.'	,'3.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim25'	,'서울'	,'관악구'	,'침대'	,	150000	,'중고 침대 팝니다.'	,'4.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim26'	,'서울'	,'관악구'	,'청소기'	,	50000	,'중고 청소기 팝니다.'	,'5.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim27'	,'서울'	,'광진구'	,'세탁기'	,	200000	,'중고 세탁기 팝니다.'	,'1.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim28'	,'서울'	,'광진구'	,'냉장고'	,	100000	,'중고 냉장고 팝니다.'	,'2.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim29'	,'서울'	,'광진구'	,'쇼파'	,	80000	,'중고 쇼파 팝니다.'	,'3.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim30'	,'서울'	,'광진구'	,'침대'	,	150000	,'중고 침대 팝니다.'	,'4.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim31'	,'서울'	,'광진구'	,'청소기'	,	50000	,'중고 청소기 팝니다.'	,'5.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim32'	,'서울'	,'구로구'	,'세탁기'	,	200000	,'중고 세탁기 팝니다.'	,'1.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim33'	,'서울'	,'구로구'	,'냉장고'	,	100000	,'중고 냉장고 팝니다.'	,'2.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim34'	,'서울'	,'구로구'	,'쇼파'	,	80000	,'중고 쇼파 팝니다.'	,'3.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim35'	,'서울'	,'구로구'	,'침대'	,	150000	,'중고 침대 팝니다.'	,'4.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim36'	,'서울'	,'구로구'	,'청소기'	,	50000	,'중고 청소기 팝니다.'	,'5.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim37'	,'서울'	,'금천구'	,'세탁기'	,	200000	,'중고 세탁기 팝니다.'	,'1.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim38'	,'서울'	,'금천구'	,'냉장고'	,	100000	,'중고 냉장고 팝니다.'	,'2.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim39'	,'서울'	,'금천구'	,'쇼파'	,	80000	,'중고 쇼파 팝니다.'	,'3.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim40'	,'서울'	,'금천구'	,'침대'	,	150000	,'중고 침대 팝니다.'	,'4.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim41'	,'서울'	,'금천구'	,'청소기'	,	50000	,'중고 청소기 팝니다.'	,'5.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim42'	,'서울'	,'노원구'	,'세탁기'	,	200000	,'중고 세탁기 팝니다.'	,'1.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim43'	,'서울'	,'노원구'	,'냉장고'	,	100000	,'중고 냉장고 팝니다.'	,'2.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim44'	,'서울'	,'노원구'	,'쇼파'	,	80000	,'중고 쇼파 팝니다.'	,'3.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim45'	,'서울'	,'노원구'	,'침대'	,	150000	,'중고 침대 팝니다.'	,'4.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim46'	,'서울'	,'노원구'	,'청소기'	,	50000	,'중고 청소기 팝니다.'	,'5.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim47'	,'서울'	,'도봉구'	,'세탁기'	,	200000	,'중고 세탁기 팝니다.'	,'1.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim48'	,'서울'	,'도봉구'	,'냉장고'	,	100000	,'중고 냉장고 팝니다.'	,'2.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim49'	,'서울'	,'도봉구'	,'쇼파'	,	80000	,'중고 쇼파 팝니다.'	,'3.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim50'	,'서울'	,'도봉구'	,'침대'	,	150000	,'중고 침대 팝니다.'	,'4.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim51'	,'서울'	,'도봉구'	,'청소기'	,	50000	,'중고 청소기 팝니다.'	,'5.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim52'	,'서울'	,'동대문구'	,'세탁기'	,	200000	,'중고 세탁기 팝니다.'	,'1.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim53'	,'서울'	,'동대문구'	,'냉장고'	,	100000	,'중고 냉장고 팝니다.'	,'2.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim54'	,'서울'	,'동대문구'	,'쇼파'	,	80000	,'중고 쇼파 팝니다.'	,'3.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim55'	,'서울'	,'동대문구'	,'침대'	,	150000	,'중고 침대 팝니다.'	,'4.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim56'	,'서울'	,'동대문구'	,'청소기'	,	50000	,'중고 청소기 팝니다.'	,'5.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim57'	,'서울'	,'동작구'	,'세탁기'	,	200000	,'중고 세탁기 팝니다.'	,'1.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim58'	,'서울'	,'동작구'	,'냉장고'	,	100000	,'중고 냉장고 팝니다.'	,'2.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim59'	,'서울'	,'동작구'	,'쇼파'	,	80000	,'중고 쇼파 팝니다.'	,'3.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim60'	,'서울'	,'동작구'	,'침대'	,	150000	,'중고 침대 팝니다.'	,'4.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim61'	,'서울'	,'동작구'	,'청소기'	,	50000	,'중고 청소기 팝니다.'	,'5.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim62'	,'서울'	,'마포구'	,'세탁기'	,	200000	,'중고 세탁기 팝니다.'	,'1.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim63'	,'서울'	,'마포구'	,'냉장고'	,	100000	,'중고 냉장고 팝니다.'	,'2.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim64'	,'서울'	,'마포구'	,'쇼파'	,	80000	,'중고 쇼파 팝니다.'	,'3.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim65'	,'서울'	,'마포구'	,'침대'	,	150000	,'중고 침대 팝니다.'	,'4.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim66'	,'서울'	,'마포구'	,'청소기'	,	50000	,'중고 청소기 팝니다.'	,'5.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim67'	,'서울'	,'서대문구'	,'세탁기'	,	200000	,'중고 세탁기 팝니다.'	,'1.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim68'	,'서울'	,'서대문구'	,'냉장고'	,	100000	,'중고 냉장고 팝니다.'	,'2.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim69'	,'서울'	,'서대문구'	,'쇼파'	,	80000	,'중고 쇼파 팝니다.'	,'3.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim70'	,'서울'	,'서대문구'	,'침대'	,	150000	,'중고 침대 팝니다.'	,'4.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim71'	,'서울'	,'서대문구'	,'청소기'	,	50000	,'중고 청소기 팝니다.'	,'5.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim72'	,'서울'	,'서초구'	,'세탁기'	,	200000	,'중고 세탁기 팝니다.'	,'1.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim73'	,'서울'	,'서초구'	,'냉장고'	,	100000	,'중고 냉장고 팝니다.'	,'2.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim74'	,'서울'	,'서초구'	,'쇼파'	,	80000	,'중고 쇼파 팝니다.'	,'3.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim75'	,'서울'	,'서초구'	,'침대'	,	150000	,'중고 침대 팝니다.'	,'4.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim76'	,'서울'	,'서초구'	,'청소기'	,	50000	,'중고 청소기 팝니다.'	,'5.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim77'	,'서울'	,'성동구'	,'세탁기'	,	200000	,'중고 세탁기 팝니다.'	,'1.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim78'	,'서울'	,'성동구'	,'냉장고'	,	100000	,'중고 냉장고 팝니다.'	,'2.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim79'	,'서울'	,'성동구'	,'쇼파'	,	80000	,'중고 쇼파 팝니다.'	,'3.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim80'	,'서울'	,'성동구'	,'침대'	,	150000	,'중고 침대 팝니다.'	,'4.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim81'	,'서울'	,'성동구'	,'청소기'	,	50000	,'중고 청소기 팝니다.'	,'5.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim82'	,'서울'	,'성북구'	,'세탁기'	,	200000	,'중고 세탁기 팝니다.'	,'1.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim83'	,'서울'	,'성북구'	,'냉장고'	,	100000	,'중고 냉장고 팝니다.'	,'2.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim84'	,'서울'	,'성북구'	,'쇼파'	,	80000	,'중고 쇼파 팝니다.'	,'3.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim85'	,'서울'	,'성북구'	,'침대'	,	150000	,'중고 침대 팝니다.'	,'4.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim86'	,'서울'	,'성북구'	,'청소기'	,	50000	,'중고 청소기 팝니다.'	,'5.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim87'	,'서울'	,'송파구'	,'세탁기'	,	200000	,'중고 세탁기 팝니다.'	,'1.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim88'	,'서울'	,'송파구'	,'냉장고'	,	100000	,'중고 냉장고 팝니다.'	,'2.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim89'	,'서울'	,'송파구'	,'쇼파'	,	80000	,'중고 쇼파 팝니다.'	,'3.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim90'	,'서울'	,'송파구'	,'침대'	,	150000	,'중고 침대 팝니다.'	,'4.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim91'	,'서울'	,'송파구'	,'청소기'	,	50000	,'중고 청소기 팝니다.'	,'5.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim92'	,'서울'	,'양천구'	,'세탁기'	,	200000	,'중고 세탁기 팝니다.'	,'1.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim93'	,'서울'	,'양천구'	,'냉장고'	,	100000	,'중고 냉장고 팝니다.'	,'2.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim94'	,'서울'	,'양천구'	,'쇼파'	,	80000	,'중고 쇼파 팝니다.'	,'3.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim95'	,'서울'	,'양천구'	,'침대'	,	150000	,'중고 침대 팝니다.'	,'4.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim96'	,'서울'	,'양천구'	,'청소기'	,	50000	,'중고 청소기 팝니다.'	,'5.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim97'	,'서울'	,'영등포구'	,'세탁기'	,	200000	,'중고 세탁기 팝니다.'	,'1.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim98'	,'서울'	,'영등포구'	,'냉장고'	,	100000	,'중고 냉장고 팝니다.'	,'2.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim99'	,'서울'	,'영등포구'	,'쇼파'	,	80000	,'중고 쇼파 팝니다.'	,'3.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim100'	,'서울'	,'영등포구'	,'침대'	,	150000	,'중고 침대 팝니다.'	,'4.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim101'	,'서울'	,'영등포구'	,'청소기'	,	50000	,'중고 청소기 팝니다.'	,'5.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim102'	,'서울'	,'용산구'	,'세탁기'	,	200000	,'중고 세탁기 팝니다.'	,'1.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim103'	,'서울'	,'용산구'	,'냉장고'	,	100000	,'중고 냉장고 팝니다.'	,'2.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim104'	,'서울'	,'용산구'	,'쇼파'	,	80000	,'중고 쇼파 팝니다.'	,'3.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim105'	,'서울'	,'용산구'	,'침대'	,	150000	,'중고 침대 팝니다.'	,'4.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim106'	,'서울'	,'용산구'	,'청소기'	,	50000	,'중고 청소기 팝니다.'	,'5.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim107'	,'서울'	,'은평구'	,'세탁기'	,	200000	,'중고 세탁기 팝니다.'	,'1.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim108'	,'서울'	,'은평구'	,'냉장고'	,	100000	,'중고 냉장고 팝니다.'	,'2.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim109'	,'서울'	,'은평구'	,'쇼파'	,	80000	,'중고 쇼파 팝니다.'	,'3.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim110'	,'서울'	,'은평구'	,'침대'	,	150000	,'중고 침대 팝니다.'	,'4.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim111'	,'서울'	,'은평구'	,'청소기'	,	50000	,'중고 청소기 팝니다.'	,'5.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim112'	,'서울'	,'종로구'	,'세탁기'	,	200000	,'중고 세탁기 팝니다.'	,'1.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim113'	,'서울'	,'종로구'	,'냉장고'	,	100000	,'중고 냉장고 팝니다.'	,'2.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim114'	,'서울'	,'종로구'	,'쇼파'	,	80000	,'중고 쇼파 팝니다.'	,'3.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim115'	,'서울'	,'종로구'	,'침대'	,	150000	,'중고 침대 팝니다.'	,'4.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim116'	,'서울'	,'종로구'	,'청소기'	,	50000	,'중고 청소기 팝니다.'	,'5.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim117'	,'서울'	,'중구'	,'세탁기'	,	200000	,'중고 세탁기 팝니다.'	,'1.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim118'	,'서울'	,'중구'	,'냉장고'	,	100000	,'중고 냉장고 팝니다.'	,'2.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim119'	,'서울'	,'중구'	,'쇼파'	,	80000	,'중고 쇼파 팝니다.'	,'3.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim120'	,'서울'	,'중구'	,'침대'	,	150000	,'중고 침대 팝니다.'	,'4.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim121'	,'서울'	,'중구'	,'청소기'	,	50000	,'중고 청소기 팝니다.'	,'5.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim122'	,'서울'	,'중랑구'	,'세탁기'	,	200000	,'중고 세탁기 팝니다.'	,'1.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim123'	,'서울'	,'중랑구'	,'냉장고'	,	100000	,'중고 냉장고 팝니다.'	,'2.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim124'	,'서울'	,'중랑구'	,'쇼파'	,	80000	,'중고 쇼파 팝니다.'	,'3.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim125'	,'서울'	,'중랑구'	,'침대'	,	150000	,'중고 침대 팝니다.'	,'4.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
+insert into market values	(seq_market.nextval	,'kim126'	,'서울'	,'중랑구'	,'청소기'	,	50000	,'중고 청소기 팝니다.'	,'5.jpg'	,'',''	,0,seq_market.currval,0,0,sysdate);
